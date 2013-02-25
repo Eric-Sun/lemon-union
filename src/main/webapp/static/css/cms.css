@@ -1,0 +1,77 @@
+.recommendChannel{
+    background-color:#F6E7D0;
+}
+.recommendSpringBreeze{
+    background-color:#D9E6C5;
+}
+.recommendPool{
+    background-color:#F5FCE0;
+}
+.len_title{
+    max-width: 100px;
+}
+.choose {
+    background: none;
+}
+
+.choose input {
+    margin-left: 30px;
+}
+
+form select {
+    width: 100px;
+}
+
+form label {
+    margin-left: 10px;
+}
+
+form input {
+    height: 25px;
+}
+
+table {
+    font-size: 14px;
+}
+
+table thead {
+    font-weight: 700;
+}
+
+.page select {
+    width: auto;
+    min-width: 50px;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.top .well {
+    height: 20px;
+    padding: 8px 35px 8px 14px;
+    margin-bottom: 18px;
+    border: none;
+}
+
+/*  modal start */
+#showModal {
+    margin-top: -350px;
+}
+
+#showModal .modal-body {
+    max-height: 600px;
+}
+
+#showModal form input, #showModal form select, #showModal form textarea {
+    width: 50%;
+}
+
+#showModal form input, #showModal form select {
+    height: 25px;
+}
+
+.icon{
+    width:60px;
+    height: 60px;
+    padding-right: 5px;}
+/*  modal end */
+
