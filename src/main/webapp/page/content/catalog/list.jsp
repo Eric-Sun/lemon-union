@@ -18,41 +18,42 @@
     </div>
     <div class="body">
         <div>
-                <table id="myTable" class="table table-bordered table-condensed">
-                    <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>栏目名称</th>
-                         <th>父id</th>
-                         <th>类型</th>
-                         <th>排序</th>
-                         <th>时间</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach var="dto" items="${list}">
+            <table id="myTable" class="table table-bordered table-condensed">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>栏目名称</th>
+                    <th>父id</th>
+                    <th>类型</th>
+                    <th>排序</th>
+                    <th>时间</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach var="dto" items="${list}">
 
                     <td>${dto.id}</td>
-                            <td>${dto.name}</td>
-                            <td>${dto.parentid}</td>
-                             <td>${dto.isleaf}</td>
-                              <td>${dto.orders}</td>
-                               <td>${dto.createtime}</td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
+                    <td>${dto.name}</td>
+                    <td>${dto.parentid}</td>
+                    <td>${dto.isleaf}</td>
+                    <td>${dto.orders}</td>
+                    <td>${dto.createtime}</td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
             </form>
         </div>
     </div>
     <jsp:include page="/page/common/message.jsp"/>
 </div>
-<jsp:include page="modal.jsp" />
 </body>
 <script>
-$(document).ready(function()
-    {
-        $("#myTable").tablesorter( {sortList: [[0,0], [1,0]]} );
+    $(document).ready(function () {
+        $("#myTable").tablesorter({sortList: [
+            [0, 0],
+            [1, 0]
+        ]});
     });
 </script>
 </html>

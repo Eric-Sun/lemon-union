@@ -9,7 +9,7 @@ public class LemNewsDTO {
 	private String title;
 	private String brief;
 	private String content;
-	private String origin;
+	private String orign;
 	private String editor;
 	private String link;
 	private int status;
@@ -18,7 +18,16 @@ public class LemNewsDTO {
 	private int flag;
 	private Date createtime;
 	private Date modifytime;
-	public long getId() {
+
+    public String getOrign() {
+        return orign;
+    }
+
+    public void setOrign(String orign) {
+        this.orign = orign;
+    }
+
+    public long getId() {
 		return id;
 	}
 	public void setId(long id) {
@@ -53,12 +62,6 @@ public class LemNewsDTO {
 	}
 	public void setContent(String content) {
 		this.content = content;
-	}
-	public String getOrigin() {
-		return origin;
-	}
-	public void setOrigin(String origin) {
-		this.origin = origin;
 	}
 	public String getEditor() {
 		return editor;

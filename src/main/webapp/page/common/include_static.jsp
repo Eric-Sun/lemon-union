@@ -19,3 +19,4 @@
 <script src="/static/js/bootstrap-datepicker.js"></script>
 <script src="/static/js/cms.js"></script>
 <script src="/static/js/jquery.tablesorter.js"></script>
+<script src="/static/js/ckeditor/ckeditor.js"></script>

@@ -28,17 +28,17 @@ public class AdownerDAO {
 
 	public void update(long id, String name, String company, String brief,
 			int status) {
-		String sql = "update lem_adowner set name=?,company=?,brief=?,status=? where id=?";
+		String sql = "update lem_adowner set name=?,company=?,brief=?,status=? where adownerid=?";
 		j.update(sql, new Object[] { name, company, brief, status, id });
 	}
 
 	public void delete(long id) {
-		String sql = "delete from lem_adowner where id=?";
+		String sql = "delete from lem_adowner where adownerid=?";
 		j.update(sql, new Object[] { id });
 	}
 
 	public AdownerDTO show(long id){
-		String sql = "select * from lem_adowner where id=?";
+		String sql = "select * from lem_adowner where adownerid=?";
 		return (AdownerDTO)j.query(sql, new Object[] {id}, new BeanPropertyRowMapper(
 				AdownerDTO.class)).get(0);
 	}

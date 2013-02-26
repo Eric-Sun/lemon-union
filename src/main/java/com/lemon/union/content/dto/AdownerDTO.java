@@ -3,19 +3,22 @@ package com.lemon.union.content.dto;
 import java.util.Date;
 
 public class AdownerDTO {
-	private long id;
+	private long adownerid;
 	private String name;
 	private String company;
 	private String brief;
 	private int status;
 	private Date createtime;
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
-	public String getName() {
+
+    public long getAdownerid() {
+        return adownerid;
+    }
+
+    public void setAdownerid(long adownerid) {
+        this.adownerid = adownerid;
+    }
+
+    public String getName() {
 		return name;
 	}
 	public void setName(String name) {

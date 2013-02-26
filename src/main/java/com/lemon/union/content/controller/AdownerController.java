@@ -19,30 +19,31 @@ import com.lemon.union.content.service.AdownerService;
 @RequestMapping("/content/adowner")
 public class AdownerController {
 
-	@Autowired
-	AdownerService service;
+    @Autowired
+    AdownerService service;
 
-	@RequestMapping("/list")
-	public ModelAndView list(HttpServletRequest request,
-			HttpServletResponse response) {
-		List<AdownerDTO> list = service.list();
-		ModelAndView mav = new ModelAndView("/content/adowner/list");
-		mav.addObject("list", list);
-		return mav;
-	}
+    @RequestMapping("/list")
+    public ModelAndView list(HttpServletRequest request,
+                             HttpServletResponse response) {
+        List<AdownerDTO> list = service.list();
+        ModelAndView mav = new ModelAndView("/content/adowner/list");
+        mav.addObject("list", list);
+        return mav;
+    }
 
     @RequestMapping("/show")
-    @ResponseBody
-    public String show(HttpServletRequest request,
+    public ModelAndView show(HttpServletRequest request,
                              HttpServletResponse response) {
         Long id = new Long(request.getParameter("id"));
         AdownerDTO dto = service.show(id);
-        return JSON.toJSONString(dto);
+        ModelAndView mav = new ModelAndView("/content/adowner/show");
+        mav.addObject("dto", dto);
+        return mav;
     }
 
     @RequestMapping("/delete")
     public ModelAndView delete(HttpServletRequest request,
-                             HttpServletResponse response) {
+                               HttpServletResponse response) {
         Long id = new Long(request.getParameter("id"));
         service.delete(id);
         ModelAndView mav = new ModelAndView("forward:/content/adowner/list");
@@ -51,23 +52,24 @@ public class AdownerController {
 
     @RequestMapping("/create")
     public ModelAndView create(HttpServletRequest request,
-                             HttpServletResponse response) {
+                               HttpServletResponse response) {
         String name = request.getParameter("name");
         String company = request.getParameter("company");
         String brief = request.getParameter("brief");
-        int status = new Integer(request.getParameter("status"));
-        service.create(name,company,brief,status);
+        int status = 1;
+        service.create(name, company, brief, status);
         ModelAndView mav = new ModelAndView("forward:/content/adowner/list");
         return mav;
     }
 
     @RequestMapping("/update")
     public ModelAndView update(HttpServletRequest request,
-                             HttpServletResponse response) {
+                               HttpServletResponse response) {
         String name = request.getParameter("name");
         long id = new Long(request.getParameter("id"));
         String company = request.getParameter("company");
         String brief = request.getParameter("brief");
+        service.update(id,name,company,brief,1);
         ModelAndView mav = new ModelAndView("forward:/content/adowner/list");
         return mav;
     }

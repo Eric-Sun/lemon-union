@@ -15,13 +15,13 @@
 			<value>com.mysql.jdbc.Driver</value>
 		</property>
 		<property name="jdbcUrl">
-			  <value>jdbc:mysql://106.187.38.90:3306/lemon</value>
+			  <value>jdbc:mysql://localhost:3306/lemon</value>
 		</property>
 		<property name="user">
-			<value>lemon</value>
+			<value>root</value>
 		</property>
 		<property name="password">
-			<value>lemon001)(</value>
+			<value>123456</value>
 		</property>
 		<property name="minPoolSize" value="10" />  
 	    <property name="maxPoolSize" value="20" />  
