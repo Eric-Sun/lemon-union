@@ -1,5 +1,7 @@
 package com.lemon.union.content.dto;
 
+import java.util.Date;
+
 /**
  * Created with IntelliJ IDEA.
  * User: sunbo
@@ -11,10 +13,19 @@ public class ProductDTO {
 
     private long pid;
     private String name;
-    private String trumbnail ;
+    private String thumbnail ;
     private String brief;
     private String commission;
     private int status;
+    private Date createtime;
+
+    public Date getCreatetime() {
+        return createtime;
+    }
+
+    public void setCreatetime(Date createtime) {
+        this.createtime = createtime;
+    }
 
     public long getPid() {
         return pid;
@@ -32,12 +43,12 @@ public class ProductDTO {
         this.name = name;
     }
 
-    public String getTrumbnail() {
-        return trumbnail;
+    public String getThumbnail() {
+        return thumbnail;
     }
 
-    public void setTrumbnail(String trumbnail) {
-        this.trumbnail = trumbnail;
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
     }
 
     public String getBrief() {

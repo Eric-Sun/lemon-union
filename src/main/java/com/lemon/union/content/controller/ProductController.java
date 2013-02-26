@@ -29,7 +29,7 @@ public class ProductController {
     public ModelAndView show(HttpServletRequest request, HttpServletResponse response) {
         Long id = new Long(request.getParameter("pid"));
         ProductDTO dto = service.show(id);
-        ModelAndView mav = new ModelAndView("/content/adcode/show");
+        ModelAndView mav = new ModelAndView("/content/product/show");
         mav.addObject("dto", dto);
         return mav;
     }
@@ -41,7 +41,7 @@ public class ProductController {
         String brief = request.getParameter("brief");
         String commission = request.getParameter("commission");
         service.create(name, thumbnail, brief, commission, 1);
-        ModelAndView mav = new ModelAndView("forward:/content/adcode/list");
+        ModelAndView mav = new ModelAndView("forward:/content/product/list");
         return mav;
     }
 
@@ -53,14 +53,14 @@ public class ProductController {
         String brief = request.getParameter("brief");
         String commission = request.getParameter("commission");
         service.update(id, name, thumbnail, brief, commission, 1);
-        ModelAndView mav = new ModelAndView("forward:/content/adcode/list");
+        ModelAndView mav = new ModelAndView("forward:/content/product/list");
         return mav;
     }
 
     @RequestMapping("/list")
     public ModelAndView list(HttpServletRequest request, HttpServletResponse response) {
         List<ProductDTO> list = service.list();
-        ModelAndView mav = new ModelAndView("/content/adcode/list");
+        ModelAndView mav = new ModelAndView("/content/product/list");
         mav.addObject("list", list);
         return mav;
     }
@@ -69,7 +69,7 @@ public class ProductController {
     public ModelAndView delete(HttpServletRequest request, HttpServletResponse response) {
         long id = new Long(request.getParameter("pid"));
         service.delete(id);
-        ModelAndView mav = new ModelAndView("forward:/content/adcode/list");
+        ModelAndView mav = new ModelAndView("forward:/content/product/list");
         return mav;
     }
 

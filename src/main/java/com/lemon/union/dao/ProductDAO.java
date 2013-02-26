@@ -54,7 +54,7 @@ public class ProductDAO {
 
     public void update(long pid, String name, String thumbnail, String brief, String commission, int status) {
         String sql = "update lem_product set name=?,thumbnail=?,brief=?,commission=?,status=? where pid=?";
-        j.update(name, thumbnail, brief, commission, status, pid);
+        j.update(sql, new Object[]{name, thumbnail, brief, commission, status, pid});
     }
 
     public ProductDTO show(long pid) {
