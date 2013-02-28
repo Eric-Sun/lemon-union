@@ -1,5 +1,7 @@
 package com.lemon.union.content.dto;
 
+import java.util.Date;
+
 /**
  * Created with IntelliJ IDEA.
  * User: sunbo
@@ -11,7 +13,7 @@ public class AdownerCodeDTO {
     private long id;
     private long adownerid;
     private long pid;
-    private String serviceCode;
+    private String servicecode;
     private String servicename;
     private String servicefee;
     private String ownerfee;
@@ -21,6 +23,25 @@ public class AdownerCodeDTO {
     private String brief;
     private String offnum;
     private String offbase;
+    private int status;
+
+    private Date createtime;
+
+    public Date getCreatetime() {
+        return createtime;
+    }
+
+    public void setCreatetime(Date createtime) {
+        this.createtime = createtime;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public String getRemark() {
         return remark;
@@ -54,12 +75,12 @@ public class AdownerCodeDTO {
         this.pid = pid;
     }
 
-    public String getServiceCode() {
-        return serviceCode;
+    public String getServicecode() {
+        return servicecode;
     }
 
-    public void setServiceCode(String serviceCode) {
-        this.serviceCode = serviceCode;
+    public void setServicecode(String servicecode) {
+        this.servicecode = servicecode;
     }
 
     public String getServicename() {

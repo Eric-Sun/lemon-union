@@ -46,19 +46,19 @@ public class AdownerCodeController {
     }
 
     @RequestMapping("/show")
-    @ResponseBody
-    public String show(HttpServletRequest request,
-                               HttpServletResponse response) {
+    public ModelAndView show(HttpServletRequest request,
+                             HttpServletResponse response) {
         long id = new Long(request.getParameter("id"));
         AdownerCodeDTO dto = service.show(id);
-        return JSON.toJSONString(dto);
+        ModelAndView mav = new ModelAndView("/content/adcode/show");
+        mav.addObject("dto", dto);
+        return mav;
     }
 
 
     @RequestMapping("/create")
     public ModelAndView create(HttpServletRequest request,
                                HttpServletResponse response) {
-        long id = new Long(request.getParameter("id"));
         long adownerid = new Long(request.getParameter("adownerid"));
         long pid = new Long(request.getParameter("pid"));
         String servicecode = request.getParameter("servicecode");
@@ -67,10 +67,12 @@ public class AdownerCodeController {
         String ownerfee = request.getParameter("ownerfee");
         String ordercode = request.getParameter("ordercode");
         String orderdest = request.getParameter("orderdest");
+        String servicephone = request.getParameter("servicephone");
         String brief = request.getParameter("brief");
         String offnum = request.getParameter("offnum");
         String offbase = request.getParameter("offbase");
-        service.create(adownerid, pid, servicecode, servicename, servicefee, ownerfee, ordercode, orderdest, brief, offnum, offbase);
+        String remark = request.getParameter("remark");
+        service.create(adownerid, pid, servicecode, servicename, servicefee, ownerfee, ordercode, orderdest, brief, offnum, offbase, servicephone, remark);
         ModelAndView mav = new ModelAndView("forward:/content/adcode/list");
         return mav;
     }
@@ -90,7 +92,9 @@ public class AdownerCodeController {
         String brief = request.getParameter("brief");
         String offnum = request.getParameter("offnum");
         String offbase = request.getParameter("offbase");
-        service.update(id, adownerid, pid, servicecode, servicename, servicefee, ownerfee, ordercode, orderdest, brief, offnum, offbase);
+        String servicephone = request.getParameter("servicephone");
+        String remark = request.getParameter("remark");
+        service.update(id, adownerid, pid, servicecode, servicename, servicefee, ownerfee, ordercode, orderdest, brief, offnum, offbase, servicephone, remark);
         ModelAndView mav = new ModelAndView("forward:/content/adcode/list");
         return mav;
     }

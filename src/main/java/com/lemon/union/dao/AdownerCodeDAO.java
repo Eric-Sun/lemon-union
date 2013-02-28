@@ -24,7 +24,7 @@ public class AdownerCodeDAO {
                 AdownerCodeDTO.class));
     }
 
-    public AdownerCodeDTO show(long id ) {
+    public AdownerCodeDTO show(long id) {
         String sql = "select * from lem_adowner_code where id=?";
         return (AdownerCodeDTO) j.query(sql, new Object[]{id},
                 new BeanPropertyRowMapper(AdownerCodeDTO.class)).get(0);
@@ -36,19 +36,19 @@ public class AdownerCodeDAO {
     }
 
     public void create(long adownerid, long pid, String servicecode, String servicename, String servicefee, String ownerfee,
-                       String ordercode, String orderdest, String brief, String offnum, String offbase) {
+                       String ordercode, String orderdest, String brief, String offnum, String offbase, String servicephone, String remark) {
         String sql = "insert into lem_adowner_code( adownerid, pid, servicecode, servicename, servicefee, ownerfee," +
-                "ordercode, orderdest, brief, offnum, offbase,createtime) values (?,?,?,?,?,?,?,?,?,?,?,now())";
+                "ordercode, orderdest, brief, offnum, offbase,createtime,servicephone,remark,status) values (?,?,?,?,?,?,?,?,?,?,?,now(),?,?,1)";
         j.update(sql, new Object[]{adownerid, pid, servicecode, servicename, servicefee, ownerfee,
-                ordercode, orderdest, brief, offnum, offbase});
+                ordercode, orderdest, brief, offnum, offbase, servicephone, remark});
     }
 
     public void update(long id, long adownerid, long pid, String servicecode, String servicename, String servicefee, String ownerfee,
-                       String ordercode, String orderdest, String brief, String offnum, String offbase) {
+                       String ordercode, String orderdest, String brief, String offnum, String offbase, String servicephone, String remark) {
         String sql = "update lem_adowner_code set adownerid=?,pid=?,servicecode=?,servicename=?,servicefee=?,ownerfee=?," +
-                "ordercode=?,orderdest=?,brief=?,offnum=?,offbase=? where id=?";
+                "ordercode=?,orderdest=?,brief=?,offnum=?,offbase=?,servicephone=?,remark=? where id=?";
         j.update(sql, new Object[]{adownerid, pid, servicecode, servicename, servicefee,
-                ownerfee, ordercode, orderdest, brief, offnum, offbase, id});
+                ownerfee, ordercode, orderdest, brief, offnum, offbase, servicephone, remark, id});
     }
 
 }
