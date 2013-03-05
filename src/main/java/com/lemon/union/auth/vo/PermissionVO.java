@@ -2,8 +2,6 @@ package com.lemon.union.auth.vo;
 
 import java.util.Date;
 
-import com.sun.xml.internal.bind.annotation.OverrideAnnotationOf;
-
 public class PermissionVO {
 
 	@Override
