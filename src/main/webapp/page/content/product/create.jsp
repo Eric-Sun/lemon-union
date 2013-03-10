@@ -10,10 +10,10 @@
 <div class="container">
     <div class="top">
         <jsp:include page="/page/common/top.jsp">
-            <jsp:param name="top" value="2"/>
+            <jsp:param name="top" value="1"/>
         </jsp:include>
         <jsp:include page="/page/content/include/current.jsp">
-            <jsp:param name="top" value="1"/>
+            <jsp:param name="current" value="4"/>
         </jsp:include>
     </div>
     <form name="form" class="form-horizontal" method="post" action="/content/product/create" id="form">

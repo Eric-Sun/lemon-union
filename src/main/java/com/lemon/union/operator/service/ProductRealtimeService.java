@@ -20,8 +20,11 @@ public class ProductRealtimeService {
     @Autowired
     IncomeDAO dao;
 
-    public List<ProductRealtimeDTO> query() {
-        return dao.queryForProductRealTime();
+    public List<ProductRealtimeDTO> query(int pageNum, int pageSize) {
+        return dao.queryForProductRealTime(pageNum, pageSize);
     }
 
+    public int queryCount() {
+        return dao.queryForProductRealTimeCount();
+    }
 }

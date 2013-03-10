@@ -20,8 +20,11 @@ public class BillService {
     @Autowired
     IncomeDAO dao;
 
-    public List<BillDTO> query() {
-        return dao.queryForBill();
+    public List<BillDTO> query(int pageNum,int pageSize) {
+        return dao.queryForBill(pageNum,pageSize);
     }
 
+    public int queryCount() {
+        return dao.queryForBillCount();
+    }
 }

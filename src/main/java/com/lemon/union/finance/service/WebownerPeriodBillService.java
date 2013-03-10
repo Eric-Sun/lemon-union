@@ -21,8 +21,12 @@ public class WebownerPeriodBillService {
     @Autowired
     IncomeDAO dao;
 
-    public List<WebownerPeriodBillDTO> query(Date beginDate, Date endDate) {
-        return dao.queryForWebownerPeriodBill(beginDate, endDate);
+    public List<WebownerPeriodBillDTO> query(Date beginDate, Date endDate, int pageNum, int pageSize) {
+        return dao.queryForWebownerPeriodBill(beginDate, endDate, pageNum, pageSize);
+    }
+
+    public int queryCount(Date beginDate, Date endDate) {
+        return dao.queryForWebownerPeriodBillCount(beginDate, endDate);
     }
 }
 

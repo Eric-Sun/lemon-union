@@ -1,7 +1,10 @@
 package com.lemon.union.operator.controller;
 
 import com.lemon.union.operator.dto.ProductRealtimeDTO;
+import com.lemon.union.operator.dto.RealtimeDTO;
 import com.lemon.union.operator.service.ProductRealtimeService;
+import com.lemon.union.tools.Page;
+import com.lemon.union.tools.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,9 +32,16 @@ public class ProductRealtimeController {
 
     @RequestMapping("/query")
     public ModelAndView query(HttpServletRequest request, HttpServletResponse response) throws ParseException {
-
-        List<ProductRealtimeDTO> list = service.query();
-        ModelAndView mav = new ModelAndView("/operator/provinceincome/list");
+        int pageNum = 1;
+        int pageSize = 50;
+        if (request.getParameter("pageNum") != null) {
+            pageNum = new Integer(request.getParameter("pageNum"));
+        }
+        List<ProductRealtimeDTO> list = service.query(pageNum,pageSize);
+        int count = service.queryCount();
+        ModelAndView mav = new ModelAndView("/operator/productrealtime/list");
+        Page<ProductRealtimeDTO> page = PageUtil.getPage(count, pageNum, list, pageSize);
+        mav.addObject("pageHtml", PageUtil.toPageHtml(page, request.getRequestURI(), request.getQueryString()));
         mav.addObject("list", list);
         return mav;
     }

@@ -21,8 +21,13 @@ public class RealtimeService {
     @Autowired
     IncomeDAO dao;
 
-    public List<RealtimeDTO> query() {
-        return dao.queryForRealtime();
+    public List<RealtimeDTO> query(int pageNum, int pageSize) {
+        return dao.queryForRealtime(pageNum, pageSize);
     }
+
+    public int queryCount() {
+        return dao.queryForRealtimeCount();
+    }
+
 
 }

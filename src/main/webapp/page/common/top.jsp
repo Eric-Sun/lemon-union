@@ -15,9 +15,15 @@
                 <ul class="nav">
                     <li<%if ("0".equals(request.getParameter("top"))) {%> class="active"<%}%>><a href="/auth/user/list">用户管理</a>
                     </li>
+                    <li<%if ("1".equals(request.getParameter("top"))) {%> class="active"<%}%>><a href="/content/adcode/list">内容管理</a>
+                    </li>
+                    <li<%if ("2".equals(request.getParameter("top"))) {%> class="active"<%}%>><a href="/page/operator/provinceincome/list.jsp">运营管理</a>
+                    </li>
+                    <li<%if ("3".equals(request.getParameter("top"))) {%> class="active"<%}%>><a href="/page/finance/adownerbill/list.jsp">财务管理</a>
+                    </li>
                 </ul>
                 <ul class="nav pull-right">
-                    <li><a href="#">${sessionScope.admin.fullName}</a></li>
+                    <li><a href="#">${sessionScope.name}</a></li>
                     <li><a href="/admin/logout">登出</a></li>
                     <li class="divider-vertical"></li>
                     <li class="dropdown">

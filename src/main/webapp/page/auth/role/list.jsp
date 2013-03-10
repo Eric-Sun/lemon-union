@@ -11,10 +11,10 @@
 	<div class="container">
 		<div class="top">
 			<jsp:include page="../../common/top.jsp">
-				<jsp:param name="top" value="2" />
+				<jsp:param name="top" value="0" />
 			</jsp:include>
 			<jsp:include page="../include/current.jsp">
-				<jsp:param name="top" value="2" />
+				<jsp:param name="current" value="1" />
 			</jsp:include>
 		</div>
 		<ul class="breadcrumb">

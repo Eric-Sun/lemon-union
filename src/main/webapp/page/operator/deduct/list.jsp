@@ -12,8 +12,8 @@
         <jsp:include page="/page/common/top.jsp">
             <jsp:param name="top" value="2"/>
         </jsp:include>
-        <jsp:include page="/page/content/include/current.jsp">
-            <jsp:param name="top" value="1"/>
+        <jsp:include page="/page/operator/include/current.jsp">
+            <jsp:param name="current" value="1"/>
         </jsp:include>
     </div>
     <ul class="breadcrumb">

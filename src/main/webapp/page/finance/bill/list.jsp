@@ -11,10 +11,10 @@
 <div class="container">
     <div class="top">
         <jsp:include page="/page/common/top.jsp">
-            <jsp:param name="top" value="2"/>
+            <jsp:param name="top" value="3"/>
         </jsp:include>
-        <jsp:include page="/page/content/include/current.jsp">
-            <jsp:param name="top" value="1"/>
+        <jsp:include page="/page/finance/include/current.jsp">
+            <jsp:param name="current" value="2"/>
         </jsp:include>
     </div>
     <div class="body">
@@ -46,6 +46,7 @@
             </table>
             </form>
         </div>
+        <div class="page">${pageHtml}</div>
     </div>
 </div>
 </body>

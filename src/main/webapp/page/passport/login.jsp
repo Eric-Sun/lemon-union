@@ -5,22 +5,22 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Login</title>
-    <link href="../static/css/bootstrap.css" rel="stylesheet">
-    <link href="../static/css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="../static/js/google-code-prettify/prettify.css" rel="stylesheet">
-    <link href="../static/css/datepicker.css" rel="stylesheet">
-    <link href="../static/css/cms.css" rel="stylesheet">
+    <title>后台管理系统</title>
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <link href="/static/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/static/js/google-code-prettify/prettify.css" rel="stylesheet">
+    <link href="/static/css/datepicker.css" rel="stylesheet">
+    <link href="/static/css/cms.css" rel="stylesheet">
 
 
-    <script src="../static/js/google-code-prettify/prettify.js"></script>
-    <script src="../static/js/jquery.js"></script>
-    <script src="../static/js/bootstrap.js"></script>
-    <script src="../static/js/application.js"></script>
-    <script src="../static/js/bootstrap-datepicker.js"></script>
-    <script src="../static/js/cms.js"></script>
+    <script src="/static/js/google-code-prettify/prettify.js"></script>
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/bootstrap.js"></script>
+    <script src="/static/js/application.js"></script>
+    <script src="/static/js/bootstrap-datepicker.js"></script>
+    <script src="/static/js/cms.js"></script>
 </head>
-<body style="background-image: url('../static/img/grid-18px-masked.png')">
+<body style="background-image: url('/static/img/grid-18px-masked.png')">
 <div class="modal"
      style="position: relative; top: auto; left: auto; margin: 0 auto; z-index: 1; max-width: 100%; margin-top: 15%">
     <div class="modal-header">

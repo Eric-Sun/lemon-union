@@ -9,12 +9,14 @@
 <body>
 <div class="container">
     <div class="top">
-        <jsp:include page="/page/common/top.jsp">
-            <jsp:param name="top" value="2"/>
-        </jsp:include>
-        <jsp:include page="/page/content/include/current.jsp">
-            <jsp:param name="top" value="1"/>
-        </jsp:include>
+        <div class="top">
+            <jsp:include page="/page/common/top.jsp">
+                <jsp:param name="top" value="1"/>
+            </jsp:include>
+            <jsp:include page="/page/content/include/current.jsp">
+                <jsp:param name="current" value="2"/>
+            </jsp:include>
+        </div>
     </div>
     <ul class="breadcrumb">
     			<li> <a href="/page/content/adowner/create.jsp">添加广告主</a> </li>

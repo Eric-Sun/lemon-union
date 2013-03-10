@@ -12,8 +12,8 @@
         <jsp:include page="/page/common/top.jsp">
             <jsp:param name="top" value="2"/>
         </jsp:include>
-        <jsp:include page="/page/content/include/current.jsp">
-            <jsp:param name="top" value="1"/>
+        <jsp:include page="/page/operator/include/current.jsp">
+            <jsp:param name="current" value="0"/>
         </jsp:include>
     </div>
     <form name="form" class="form-horizontal" method="post" action="/operator/provinceincome/query" id="form">

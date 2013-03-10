@@ -21,8 +21,11 @@ public class AdownerBillService {
     @Autowired
     IncomeDAO dao;
 
-    public List<AdownerBillDTO> query(Date beginDate, Date endDate) {
-        return dao.queryForAdownerBill(beginDate,endDate);
+    public List<AdownerBillDTO> query(Date beginDate, Date endDate,int pageNum,int pageSize) {
+        return dao.queryForAdownerBill(beginDate,endDate,pageNum,pageSize);
     }
 
+    public int queryCount(Date beginDate, Date endDate) {
+        return dao.queryForAdownerBillCount(beginDate,endDate);
+    }
 }

@@ -21,11 +21,11 @@ public class ProvinceIncomeService {
     @Autowired
     IncomeDAO dao;
 
-    public List<ProvinceIncomeDTO> query(Date beginDate, Date endDate) {
-        List<ProvinceIncomeDTO> l1 = dao.queryProvinceIvrIncome(beginDate, endDate);
-        List<ProvinceIncomeDTO> l2 = dao.queryProvinceSmsIncome(beginDate, endDate);
+    public List<ProvinceIncomeDTO> query(Date beginDate, Date endDate, int pageNum, int pageSize) {
+        List<ProvinceIncomeDTO> l1 = dao.queryProvinceIvrIncome(beginDate, endDate, pageNum, pageSize);
+        List<ProvinceIncomeDTO> l2 = dao.queryProvinceSmsIncome(beginDate, endDate, pageNum, pageSize);
 
-        for (ProvinceIncomeDTO d1 : l1)         {
+        for (ProvinceIncomeDTO d1 : l1) {
             for (ProvinceIncomeDTO d2 : l2) {
                 if (d1.equals(d2)) {
                     d1.setSmscount(d2.getSmscount());
@@ -35,5 +35,11 @@ public class ProvinceIncomeService {
         }
 
         return l1;
+    }
+
+    public int queryCount(Date beginDate, Date endDate) {
+        return dao.queryProvinceIvrIncomeCount(beginDate, endDate) +
+                dao.queryProvinceSmsIncomeCount(beginDate, endDate);
+
     }
 }

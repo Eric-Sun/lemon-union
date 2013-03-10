@@ -1,7 +1,10 @@
 package com.lemon.union.operator.controller;
 
+import com.lemon.union.finance.dto.AdownerBillDTO;
 import com.lemon.union.operator.dto.ProvinceIncomeDTO;
 import com.lemon.union.operator.service.ProvinceIncomeService;
+import com.lemon.union.tools.Page;
+import com.lemon.union.tools.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,8 +36,18 @@ public class ProvinceIncomeController {
     public ModelAndView query(HttpServletRequest request, HttpServletResponse response) throws ParseException {
         String beginDateStr = request.getParameter("beginDate");
         String endDateStr = request.getParameter("endDate");
-        List<ProvinceIncomeDTO> list = service.query(sdf.parse(beginDateStr+" 00:00:00"), sdf.parse(endDateStr+" 23:59:59"));
+        int pageNum = 1;
+        int pageSize = 50;
+        if (request.getParameter("pageNum") != null) {
+            pageNum = new Integer(request.getParameter("pageNum"));
+        }
+        List<ProvinceIncomeDTO> list = service.query(sdf.parse(beginDateStr + " 00:00:00"), sdf.parse(endDateStr + " 23:59:59"), pageNum, pageSize);
+        int count = service.queryCount(sdf.parse(beginDateStr + " 00:00:00"), sdf.parse(endDateStr + " 23:59:59"));
+        Page<ProvinceIncomeDTO> page = PageUtil.getPage(count, pageNum, list, pageSize);
+
         ModelAndView mav = new ModelAndView("/operator/provinceincome/list");
+        mav.addObject("list", list);
+        mav.addObject("pageHtml", PageUtil.toPageHtml(page, request.getRequestURI(), request.getQueryString()));
         mav.addObject("list", list);
         return mav;
     }

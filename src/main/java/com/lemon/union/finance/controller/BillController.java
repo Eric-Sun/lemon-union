@@ -1,7 +1,10 @@
 package com.lemon.union.finance.controller;
 
+import com.lemon.union.finance.dto.AdownerBillDTO;
 import com.lemon.union.finance.dto.BillDTO;
 import com.lemon.union.finance.service.BillService;
+import com.lemon.union.tools.Page;
+import com.lemon.union.tools.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,9 +31,16 @@ public class BillController {
 
     @RequestMapping("/query")
     public ModelAndView query(HttpServletRequest request, HttpServletResponse response) throws ParseException {
-
-        List<BillDTO> list = service.query();
+        int pageNum = 1;
+        int pageSize = 50;
+        if (request.getParameter("pageNum") != null) {
+            pageNum = new Integer(request.getParameter("pageNum"));
+        }
+        List<BillDTO> list = service.query(pageNum, pageSize);
+        int count = service.queryCount();
         ModelAndView mav = new ModelAndView("/finance/bill/list");
+        Page<BillDTO> page = PageUtil.getPage(count, pageNum, list, pageSize);
+        mav.addObject("pageHtml", PageUtil.toPageHtml(page, request.getRequestURI(), request.getQueryString()));
         mav.addObject("list", list);
         return mav;
     }
