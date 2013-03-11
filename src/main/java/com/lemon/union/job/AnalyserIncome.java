@@ -21,5 +21,6 @@ public class AnalyserIncome {
 
 
     public void analyze(String subdate) {
+        dao.doScheduler(subdate);
     }
 }

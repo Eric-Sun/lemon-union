@@ -12,6 +12,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,16 +32,20 @@ public class SchedulerJobDAO {
     @Autowired
     JdbcTemplate j;
 
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
     public void doScheduler(String subdate) {
         String sql = "select servicecode, wid, pid, channel, sum(totalincome) as totalincome, sum(feeincome) as feeincome, count(*) as feetotal, count(distinct mobile) as feeusers from lez_service_log where subtime between ? and ? group by pid, wid, channel, servicecode";
         List<Lez_webowner_channel_day> list1 = j.query(sql, new Object[]{subdate + " 00:00:00", subdate + " 23:59:59"}, new BeanPropertyRowMapper<Lez_webowner_channel_day>(Lez_webowner_channel_day.class));
         Map<String, Lez_webowner_channel_day> list = new HashMap<String, Lez_webowner_channel_day>();
         for (Lez_webowner_channel_day bill : list1) {
+            bill.setSubdate(subdate);
+            bill.setSubtime(sdf.format(new Date()));
             list.put(bill.getPid() + "|-|" + bill.getServicecode() + "|-|" + bill.getWid() + "|-|" + bill.getChannel(), bill);
         }
         String sql2 = "select servicecode, wid, pid, channel, sum(feeincome) as showincome, count(*) as showcount from lez_service_log where feeflag = 1 and subtime between ? and ? group by pid, wid, channel, servicecode";
 
-        List<Object[]> data2 = j.query(sql, new Object[]{subdate + " 00:00:00", subdate + " 23:59:59"}, new RowMapper<Object[]>() {
+        List<Object[]> data2 = j.query(sql2, new Object[]{subdate + " 00:00:00", subdate + " 23:59:59"}, new RowMapper<Object[]>() {
             @Override
             public Object[] mapRow(ResultSet rs, int rowNum) throws SQLException {
                 Object[] o = new Object[6];
@@ -72,7 +78,8 @@ public class SchedulerJobDAO {
 
         for (String key : list.keySet()) {
             final Lez_webowner_channel_day bill = (Lez_webowner_channel_day) list.get(key);
-            final String sql4 = "insert lez_bill_day(subdate, servicecode, wid, pid, channel, feecount, feeusers, feeincome," +
+            final String sql4 = "insert lez_bill_day(subdate, servicecode, wid, pid, channel, " +
+                    "feecount, feeusers, feeincome," +
                     " showcount, showincome, totalincome, subtime) values(?,?,?,?,?,?,?,?,?,?,?,?)";
             j.update(new PreparedStatementCreator() {
                 @Override
@@ -82,13 +89,15 @@ public class SchedulerJobDAO {
                     pstmt.setString(1, bill.getSubdate());
                     pstmt.setString(2, bill.getServicecode());
                     pstmt.setInt(3, Integer.valueOf(bill.getWid()));
-                    pstmt.setInt(4, Integer.valueOf(bill.getFeecount()));
-                    pstmt.setInt(5, Integer.valueOf(bill.getFeeusers()));
-                    pstmt.setFloat(6, Float.valueOf(bill.getFeeincome()));
-                    pstmt.setInt(7, Integer.valueOf(bill.getShowcount()));
-                    pstmt.setFloat(8, Float.valueOf(bill.getShowincome()));
-                    pstmt.setFloat(9, Float.valueOf(bill.getTotalincome()));
-                    pstmt.setString(10, bill.getSubtime());
+                    pstmt.setInt(4, Integer.valueOf(bill.getPid()));
+                    pstmt.setString(5, bill.getChannel());
+                    pstmt.setInt(6, Integer.valueOf(bill.getFeecount()));
+                    pstmt.setInt(7, Integer.valueOf(bill.getFeeusers()));
+                    pstmt.setFloat(8, Float.valueOf(bill.getFeeincome()));
+                    pstmt.setInt(9, Integer.valueOf(bill.getShowcount()));
+                    pstmt.setFloat(10, Float.valueOf(bill.getShowincome()));
+                    pstmt.setFloat(11, Float.valueOf(bill.getTotalincome()));
+                    pstmt.setString(12, bill.getSubtime());
                     return pstmt;
                 }
             });
