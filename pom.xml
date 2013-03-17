@@ -95,6 +95,7 @@
             <groupId>javax.servlet</groupId>
             <artifactId>jsp-api</artifactId>
             <version>2.0</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
@@ -103,8 +104,17 @@
         </dependency>
 
     </dependencies>
+    <properties>
+        <config>deploy</config>
+    </properties>
     <build>
         <finalName>lemon-union</finalName>
+        <resources>
+            <resource>
+                <directory>config/${config}</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>

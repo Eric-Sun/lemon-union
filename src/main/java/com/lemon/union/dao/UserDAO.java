@@ -28,7 +28,7 @@ public class UserDAO {
     public List<Object[]> getUserInfo(long userId) {
 
         final String select = "select r.name,p.name from role r, permission p , roles_permissions rp,user u"
-                + " where u.id=? and u.role_id=r.role_id and rp.role_id= r.role_id and rp.permission_id=p.id";
+                + " where u.id=? and u.role_id=r.id and rp.role_id= r.id and rp.permission_id=p.id";
         return j.query(select, new Object[]{userId}, new RowMapper() {
 
             public Object[] mapRow(ResultSet rs, int arg1) throws SQLException {
