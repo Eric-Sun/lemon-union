@@ -2,13 +2,18 @@ package com.lemon.union.operator.controller;
 
 import com.lemon.union.operator.dto.DeductScaleDTO;
 import com.lemon.union.operator.service.DeductScaleService;
+import com.lemon.union.utils.HttpUtil;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -21,6 +26,11 @@ import java.util.List;
 @Controller
 @RequestMapping("/operator/deduct")
 public class DeductScaleController {
+    private static Log LOG = LogFactory.getLog(DeductScaleController.class);
+
+    @Value("${deduct.url}")
+    private String DEDUCT_URL;
+
 
     @Autowired
     DeductScaleService service;
@@ -50,6 +60,7 @@ public class DeductScaleController {
         Long id = new Long(request.getParameter("id"));
         service.delete(id);
         ModelAndView mav = new ModelAndView("forward:/operator/deduct/list");
+        call();
         return mav;
     }
 
@@ -64,6 +75,7 @@ public class DeductScaleController {
         int status = 1;
         service.create(wid, pid, offbase, offno, status);
         ModelAndView mav = new ModelAndView("forward:/operator/deduct/list");
+        call();
         return mav;
     }
 
@@ -78,6 +90,18 @@ public class DeductScaleController {
         int status = 1;
         service.update(id, wid, pid, offbase, offno, status);
         ModelAndView mav = new ModelAndView("forward:/operator/deduct/list");
+        call();
         return mav;
+    }
+
+
+    private void call() {
+        try {
+            String s = HttpUtil.requestHttpContent(DEDUCT_URL);
+            LOG.info("call url=" + DEDUCT_URL + " response=" + s);
+        } catch (IOException e) {
+            LOG.error("call deduct url error.", e);
+        }
+
     }
 }
