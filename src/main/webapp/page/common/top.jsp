@@ -22,11 +22,9 @@
                     <li<%if ("2".equals(request.getParameter("top"))) {%> class="active"<%}%>><a
                             href="/page/operator/provinceincome/list.jsp">运营管理</a>
                     </li>
-                    <shiro:hasRole name="sss">
-                        <li<%if ("3".equals(request.getParameter("top"))) {%> class="active"<%}%>><a
-                                href="/page/finance/adownerbill/list.jsp">财务管理</a>
-                        </li>
-                    </shiro:hasRole>
+                    <li<%if ("3".equals(request.getParameter("top"))) {%> class="active"<%}%>><a
+                            href="/page/finance/adownerbill/list.jsp">财务管理</a>
+                    </li>
                 </ul>
                 <ul class="nav pull-right">
                     <li><a href="#">${sessionScope.name}</a></li>

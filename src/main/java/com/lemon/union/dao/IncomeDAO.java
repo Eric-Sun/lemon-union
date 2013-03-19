@@ -87,7 +87,7 @@ public class IncomeDAO {
 
     public List<WebownerBillDTO> queryForWebownerBill(int pageNum, int pageSize) {
         String sql = "select id, billdate, wid, pid, showcount, showincome, feecount, feeincome, totalincome, payflag, paytime " +
-                "from lez_webowner_bill limit " + (pageNum - 1) * pageSize + "," + pageSize;
+                "from lez_webowner_bill order by billdate desc limit " + (pageNum - 1) * pageSize + "," + pageSize;
         return j.query(sql, new Object[]{}, new BeanPropertyRowMapper<WebownerBillDTO>(WebownerBillDTO.class));
     }
 

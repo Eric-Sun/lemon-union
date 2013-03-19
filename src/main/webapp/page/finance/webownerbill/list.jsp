@@ -37,6 +37,7 @@
                 </thead>
                 <tbody>
                 <c:forEach var="dto" items="${list}">
+                    <tr>
                     <td>${dto.id}</td>
                     <td><fmt:formatDate value="${dto.billdate}" type="date"/></td>
                     <td>${dto.wid}</td>
@@ -60,10 +61,7 @@
 </body>
 <script>
     $(document).ready(function () {
-        $("#myTable").tablesorter({sortList: [
-            [0, 0],
-            [1, 0]
-        ]});
+        $("#myTable").tablesorter();
     });
 </script>
 </html>
