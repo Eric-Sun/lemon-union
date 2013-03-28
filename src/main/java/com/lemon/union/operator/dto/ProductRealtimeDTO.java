@@ -21,6 +21,15 @@ public class ProductRealtimeDTO {
     private float feeincome;
     private int feeflag;
     private Date subtime;
+    private int pid;
+
+    public int getPid() {
+        return pid;
+    }
+
+    public void setPid(int pid) {
+        this.pid = pid;
+    }
 
     public long getChannel() {
         return channel;

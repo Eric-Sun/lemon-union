@@ -35,7 +35,7 @@ public class SchedulerJobDAO {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public void doScheduler(String subdate) {
-        String sql = "select servicecode, wid, pid, channel, sum(totalincome) as totalincome, sum(feeincome) as feeincome, count(*) as feetotal, count(distinct mobile) as feeusers from lez_service_log where subtime between ? and ? group by pid, wid, channel, servicecode";
+        String sql = "select servicecode, wid, pid, channel, sum(totalincome) as totalincome, sum(feeincome) as feeincome, count(*) as feecount, count(distinct mobile) as feeusers from lez_service_log where subtime between ? and ? group by pid, wid, channel, servicecode";
         List<Lez_webowner_channel_day> list1 = j.query(sql, new Object[]{subdate + " 00:00:00", subdate + " 23:59:59"}, new BeanPropertyRowMapper<Lez_webowner_channel_day>(Lez_webowner_channel_day.class));
         Map<String, Lez_webowner_channel_day> list = new HashMap<String, Lez_webowner_channel_day>();
         for (Lez_webowner_channel_day bill : list1) {
