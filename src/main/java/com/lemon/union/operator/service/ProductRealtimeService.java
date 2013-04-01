@@ -5,6 +5,7 @@ import com.lemon.union.operator.dto.ProductRealtimeDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,11 +21,11 @@ public class ProductRealtimeService {
     @Autowired
     IncomeDAO dao;
 
-    public List<ProductRealtimeDTO> query(int pageNum, int pageSize) {
-        return dao.queryForProductRealTime(pageNum, pageSize);
+    public int queryCount(Date startTime, Date endTime, Integer wid, String mobile, String totalincome, String cmdid) {
+        return dao.queryForProductRealTimeCount(startTime, endTime, wid, mobile, totalincome, cmdid);
     }
 
-    public int queryCount() {
-        return dao.queryForProductRealTimeCount();
+    public List<ProductRealtimeDTO> query(Date startTime, Date endTime, Integer wid, String mobile, String totalincome, String cmdid, int pageNum, int pageSize) {
+        return dao.queryForProductRealTime(startTime, endTime, wid, mobile, totalincome, cmdid, pageNum, pageSize);
     }
 }

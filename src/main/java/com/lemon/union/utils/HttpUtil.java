@@ -402,42 +402,41 @@ public class HttpUtil {
                 LogUtil.error("GET HTTP CONTENT FAILED!HTTP STATUS NOT OK . status=" + statusCode);
                 return null;
             }
-            return String.valueOf(statusCode);
-//			byte[] responseBody = null;
-//			Header contentEncodingHeader = method
-//					.getResponseHeader("Content-Encoding");
-//			if (contentEncodingHeader != null
-//					&& contentEncodingHeader.getValue()
-//							.equalsIgnoreCase("gzip")) {
-//				GZIPInputStream is = new GZIPInputStream(method
-//						.getResponseBodyAsStream());
-//				ByteArrayOutputStream os = new ByteArrayOutputStream();
-//				IOUtils.copy(is, os);
-//				responseBody = os.toByteArray();
-//			} else {
-//				responseBody = method.getResponseBody();
-//			}
-//
-//			byte[] data = formatData(responseBody);
-//			String encoding = CHARSET;
-//			Header contentTypeHeader = method.getResponseHeader("Content-Type");
-//			if (contentTypeHeader != null) {
-//				String contentType = contentTypeHeader.getValue();
-//				// System.out.println("content-type:" + contentType);
-//				int offset = contentType.indexOf("=");
-//				if (offset != -1)
-//					encoding = contentType.substring(offset + 1);
-//				else {
-//					String body = new String(data, encoding);
-//					offset = body.indexOf("encoding");
-//					if (offset != -1) {
-//						int begin = body.indexOf("\"", offset);
-//						int end = body.indexOf("\"", begin + 1);
-//						encoding = body.substring(begin + 1, end);
-//					}
-//				}
-//			}
-//			return new String(data, encoding);
+			byte[] responseBody = null;
+			Header contentEncodingHeader = method
+					.getResponseHeader("Content-Encoding");
+			if (contentEncodingHeader != null
+					&& contentEncodingHeader.getValue()
+							.equalsIgnoreCase("gzip")) {
+				GZIPInputStream is = new GZIPInputStream(method
+						.getResponseBodyAsStream());
+				ByteArrayOutputStream os = new ByteArrayOutputStream();
+				IOUtils.copy(is, os);
+				responseBody = os.toByteArray();
+			} else {
+				responseBody = method.getResponseBody();
+			}
+
+			byte[] data = formatData(responseBody);
+			String encoding = CHARSET;
+			Header contentTypeHeader = method.getResponseHeader("Content-Type");
+			if (contentTypeHeader != null) {
+				String contentType = contentTypeHeader.getValue();
+				// System.out.println("content-type:" + contentType);
+				int offset = contentType.indexOf("=");
+				if (offset != -1)
+					encoding = contentType.substring(offset + 1);
+				else {
+					String body = new String(data, encoding);
+					offset = body.indexOf("encoding");
+					if (offset != -1) {
+						int begin = body.indexOf("\"", offset);
+						int end = body.indexOf("\"", begin + 1);
+						encoding = body.substring(begin + 1, end);
+					}
+				}
+			}
+			return new String(data, encoding);
 
         } catch (HttpException ex) {
             LogUtil.exception(ex);

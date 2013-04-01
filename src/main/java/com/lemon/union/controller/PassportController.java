@@ -53,4 +53,13 @@ public class PassportController {
         }
         return "/passport/home";
     }
+
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest req, HttpServletResponse resp)
+            throws Exception {
+        req.getSession().removeAttribute("name");
+        SecurityUtils.getSubject().logout();
+        return "/passport/login";
+
+    }
 }

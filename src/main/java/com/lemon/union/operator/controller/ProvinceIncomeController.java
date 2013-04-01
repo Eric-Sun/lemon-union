@@ -30,7 +30,7 @@ public class ProvinceIncomeController {
     @Autowired
     ProvinceIncomeService service;
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     @RequestMapping("/query")
     public ModelAndView query(HttpServletRequest request, HttpServletResponse response) throws ParseException {

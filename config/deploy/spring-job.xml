@@ -12,7 +12,7 @@
         <property name="jobClass" value="com.lemon.union.job.DayUpdateJob" />
         <property name="jobDataAsMap">
             <map>
-                <entry key="run" value="false" />
+                <entry key="run" value="true" />
             </map>
         </property>
         <property name="applicationContextJobDataKey" value="applicationContext"/>
@@ -20,7 +20,7 @@
     <bean id="DayUpdateJobQuartz" class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail" ref="DayUpdateJob" />
         <property name="cronExpression">
-            <value>0 13 17 * * ?</value>
+            <value>0 0 3 * * ?</value>
         </property>
     </bean>
 

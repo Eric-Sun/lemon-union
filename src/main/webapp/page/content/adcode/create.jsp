@@ -61,14 +61,14 @@
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label">结算资费</label>
+                <label class="control-label">指令</label>
 
                 <div class="controls">
                     <input type="text" name="ordercode">
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label">结算资费</label>
+                <label class="control-label">目的号</label>
 
                 <div class="controls">
                     <input type="text" name="orderdest">

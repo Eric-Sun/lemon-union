@@ -3,7 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html><html>
 <head>
-    <title>省份收入查询</title>
+    <title>产品实时数据</title>
     <jsp:include page="/page/common/include_static.jsp"/>
 </head>
 <body>
@@ -16,8 +16,23 @@
             <jsp:param name="current" value="2"/>
         </jsp:include>
     </div>
-    <form name="form" class="form-horizontal" method="post" action="/operator/productrealtime/query" id="form">
+    <form name="form" class="well form-inline" method="post"
+          action="/operator/productrealtime/query" id="form">
         <fieldset>
+            <label class="control-label">按时间：</label>
+            <input name="startTime" id="datepicker" data-date="" data-date-format="yyyy-mm-dd" style="width: 80px;"
+                   size="16" type="text" value="${param.startTime}"> 到
+            <input name="endTime" id="datepicker2" data-date="" data-date-format="yyyy-mm-dd" style="width: 80px;"
+                   size="16" type="text" value="${param.endTime}">
+            <label class="control-label">按站长id：</label>
+            <input name="wid" type="text"/>
+            <label class="control-label">按手机号码：</label>
+            <input name="mobile" type="text"/>
+            <label class="control-label">按结算金额：</label>
+            <input name="totalincome" type="text"/>
+            <label class="control-label">按指令：</label>
+            <input name="cmdid" type="text"/>
+
             <input type="submit" class="btn btn-primary" value="查询"/>
         </fieldset>
     </form>
@@ -58,6 +73,7 @@
             </table>
             </form>
         </div>
+        <div class="page">${pageHtml}</div>
     </div>
 </div>
 </body>

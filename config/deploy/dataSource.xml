@@ -15,7 +15,7 @@
 			<value>com.mysql.jdbc.Driver</value>
 		</property>
 		<property name="jdbcUrl">
-			  <value>jdbc:mysql://106.187.38.90:3306/lemon2</value>
+			  <value>jdbc:mysql://211.144.137.66:3306/lemon2</value>
 		</property>
 		<property name="user">
 			<value>lemon</value>

@@ -3,7 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html><html>
 <head>
-    <title>省份收入查询</title>
+    <title>广告主结算收入表</title>
     <jsp:include page="/page/common/include_static.jsp"/>
 </head>
 <body>

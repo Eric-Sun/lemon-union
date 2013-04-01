@@ -99,6 +99,7 @@ public class DeductScaleController {
         try {
             String s = HttpUtil.requestHttpContent(DEDUCT_URL);
             LOG.info("call url=" + DEDUCT_URL + " response=" + s);
+            System.out.println("call url=" + DEDUCT_URL + " response=" + s);
         } catch (IOException e) {
             LOG.error("call deduct url error.", e);
         }

@@ -40,12 +40,31 @@ public class WebownerBillController {
         if (request.getParameter("pageNum") != null) {
             pageNum = new Integer(request.getParameter("pageNum"));
         }
-        List<WebownerBillDTO> list = service.query(pageNum,pageSize);
+        List<WebownerBillDTO> list = service.query(pageNum, pageSize);
         int count = service.queryCount();
         ModelAndView mav = new ModelAndView("/finance/webownerbill/list");
         Page<WebownerBillDTO> page = PageUtil.getPage(count, pageNum, list, pageSize);
         mav.addObject("pageHtml", PageUtil.toPageHtml(page, request.getRequestURI(), request.getQueryString()));
         mav.addObject("list", list);
+        return mav;
+    }
+
+
+    @RequestMapping("/pay")
+    public ModelAndView pay(HttpServletRequest request, HttpServletResponse response) {
+        String[] ids = request.getParameterValues("ids");
+        int type = new Integer(request.getParameter("type"));
+        if (ids.length == 0) {
+            ModelAndView mav = new ModelAndView("/finance/webownerbill/list");
+            return mav;
+        }
+        // type 1 支付 0 取消支付
+        StringBuffer sb = new StringBuffer();
+        for (String s : ids) {
+            sb.append(s).append(",");
+        }
+        service.pay(type, sb.substring(0, sb.length() - 1));
+        ModelAndView mav = new ModelAndView("redirect:/finance/webownerbill/query");
         return mav;
     }
 }
