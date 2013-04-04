@@ -35,11 +35,11 @@ public class WebownerDAO {
 
     public void update(long wid, String truename, String mobile, String telephone, String address, String qq, String sitename,
                        String siteurl, String sitetype, String bankaddr, String bankcard, String account, Date regtime, String channel,
-                       String remark) {
+                       String remark, int msgCount) {
         String sql = "update lem_webowner set truename=?,mobile=?,telephone=?,address=?,qq=?,sitename=?," +
-                "siteurl=?,sitetype=?,bankaddr=?,bankcard=?,account=?,regtime=?,channel=?,remark=? where wid=?";
+                "siteurl=?,sitetype=?,bankaddr=?,bankcard=?,account=?,regtime=?,channel=?,remark=?,msg_count=? where wid=?";
         j.update(sql, new Object[]{truename, mobile, telephone, address, qq, sitename, siteurl, sitetype, bankaddr, bankcard, account,
-                regtime, channel.equals("") ? null : channel, remark, wid});
+                regtime, channel.equals("") ? null : channel, remark, msgCount, wid});
     }
 
     public void delete(long id) {

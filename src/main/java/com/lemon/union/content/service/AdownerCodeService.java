@@ -30,13 +30,15 @@ public class AdownerCodeService {
     }
 
     public void update(long id, long adownerid, long pid, String servicecode, String servicename, String servicefee, String ownerfee,
-                       String ordercode, String orderdest, String brief, String offnum, String offbase, String servicephone, String remark) {
+                       String ordercode, String orderdest, String brief, String offnum,
+                       String offbase, String servicephone, String remark) {
         dao.update(id, adownerid, pid, servicecode, servicename, servicefee, ownerfee, ordercode,
                 orderdest, brief, offnum, offbase, servicephone, remark);
     }
 
     public void create(long adownerid, long pid, String servicecode, String servicename, String servicefee, String ownerfee,
-                       String ordercode, String orderdest, String brief, String offnum, String offbase, String servicephone, String
+                       String ordercode, String orderdest,
+                       String brief, String offnum, String offbase, String servicephone, String
             remark) {
         dao.create(adownerid, pid, servicecode, servicename, servicefee, ownerfee, ordercode,
                 orderdest, brief, offnum, offbase, servicephone, remark);

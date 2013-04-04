@@ -72,7 +72,12 @@ public class AdownerCodeController {
         String offnum = request.getParameter("offnum");
         String offbase = request.getParameter("offbase");
         String remark = request.getParameter("remark");
-        service.create(adownerid, pid, servicecode, servicename, servicefee, ownerfee, ordercode, orderdest, brief, offnum, offbase, servicephone, remark);
+//        int msgCount = 0;
+//        if (request.getParameter("msgCount") != null)
+//            msgCount = new Integer(request.getParameter("msgCount"));
+        service.create(adownerid, pid, servicecode, servicename, servicefee,
+                ownerfee, ordercode, orderdest, brief, offnum, offbase, servicephone,
+                remark);
         ModelAndView mav = new ModelAndView("forward:/content/adcode/list");
         return mav;
     }
@@ -94,7 +99,11 @@ public class AdownerCodeController {
         String offbase = request.getParameter("offbase");
         String servicephone = request.getParameter("servicephone");
         String remark = request.getParameter("remark");
-        service.update(id, adownerid, pid, servicecode, servicename, servicefee, ownerfee, ordercode, orderdest, brief, offnum, offbase, servicephone, remark);
+//        int msgCount = 0;
+//        if (request.getParameter("msgCount") != null)
+//            msgCount = new Integer(request.getParameter("msgCount"));
+        service.update(id, adownerid, pid, servicecode, servicename,
+                servicefee, ownerfee, ordercode, orderdest, brief, offnum, offbase, servicephone, remark);
         ModelAndView mav = new ModelAndView("forward:/content/adcode/list");
         return mav;
     }

@@ -36,9 +36,10 @@ public class AdownerCodeDAO {
     }
 
     public void create(long adownerid, long pid, String servicecode, String servicename, String servicefee, String ownerfee,
-                       String ordercode, String orderdest, String brief, String offnum, String offbase, String servicephone, String remark) {
+                       String ordercode, String orderdest, String brief,
+                       String offnum, String offbase, String servicephone, String remark) {
         String sql = "insert into lem_adowner_code( adownerid, pid, servicecode, servicename, servicefee, ownerfee," +
-                "ordercode, orderdest, brief, offnum, offbase,createtime,servicephone,remark,status) values (?,?,?,?,?,?,?,?,?,?,?,now(),?,?,1)";
+                "ordercode, orderdest, brief, offnum, offbase,createtime,servicephone,remark,status,msg_count) values (?,?,?,?,?,?,?,?,?,?,?,now(),?,?,1,?)";
         j.update(sql, new Object[]{adownerid, pid, servicecode, servicename, servicefee, ownerfee,
                 ordercode, orderdest, brief, offnum, offbase, servicephone, remark});
     }

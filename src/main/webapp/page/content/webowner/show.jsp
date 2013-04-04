@@ -3,7 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html><html>
 <head>
-    <title>新闻管理列表</title>
+    <title>网站主管理列表</title>
     <jsp:include page="/page/common/include_static.jsp"/>
 </head>
 <body>
@@ -131,6 +131,15 @@
                     <textarea name="remark">${dto.remark}</textarea>
                 </div>
             </div>
+
+            <div class="control-group">
+                <label class="control-label">每天限量（如果为0是不限量）</label>
+
+                <div class="controls">
+                    <input type="text" name="msgCount" value="${dto.msgCount}">
+                </div>
+            </div>
+
             <div class="control-group">
                 <div class="controls">
                     <input type="submit" class="btn btn-primary" value="提交"/>

@@ -42,6 +42,24 @@ public class WebownerDTO {
     private String regip;
     private String regsource;
     private String type;
+    private int msgCount;
+    private int todayCount;
+
+    public int getMsgCount() {
+        return msgCount;
+    }
+
+    public void setMsgCount(int msgCount) {
+        this.msgCount = msgCount;
+    }
+
+    public int getTodayCount() {
+        return todayCount;
+    }
+
+    public void setTodayCount(int todayCount) {
+        this.todayCount = todayCount;
+    }
 
     public String getAccount() {
         return account;

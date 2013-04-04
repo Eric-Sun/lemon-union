@@ -64,9 +64,12 @@ public class WebownerController {
         String regtime = request.getParameter("regtime");
         String channel = request.getParameter("channel");
         String remark = request.getParameter("remark");
+        int msgCount = 0;
+        if (request.getParameter("msgCount") != null)
+            msgCount = new Integer(request.getParameter("msgCount"));
         service.update(wid, truename, mobile, telephone, address, qq, sitename,
                 siteurl, sitetype, bankaddr, bankcard, account, sdf.parse(regtime), channel,
-                remark);
+                remark,msgCount);
         ModelAndView mav = new ModelAndView("redirect:/content/webowner/list");
         return mav;
     }

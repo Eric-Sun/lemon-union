@@ -15,7 +15,7 @@
 			<value>com.mysql.jdbc.Driver</value>
 		</property>
 		<property name="jdbcUrl">
-			  <value>jdbc:mysql://localhost:3306/lemon</value>
+			  <value>jdbc:mysql://localhost:3306/lemon2</value>
 		</property>
 		<property name="user">
 			<value>root</value>

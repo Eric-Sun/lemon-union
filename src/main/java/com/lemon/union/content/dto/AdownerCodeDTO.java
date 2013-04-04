@@ -24,7 +24,6 @@ public class AdownerCodeDTO {
     private String offnum;
     private String offbase;
     private int status;
-
     private Date createtime;
 
     public Date getCreatetime() {

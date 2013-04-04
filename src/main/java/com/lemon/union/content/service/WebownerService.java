@@ -27,11 +27,11 @@ public class WebownerService {
 
     public void update(long wid, String truename, String mobile, String telephone, String address, String qq, String sitename,
                        String siteurl, String sitetype, String bankaddr, String bankcard, String account, Date regtime, String channel,
-                       String remark) {
+                       String remark, int msgCount) {
         dao.update(
                 wid, truename, mobile, telephone, address, qq, sitename,
                 siteurl, sitetype, bankaddr, bankcard, account, regtime, channel,
-                remark);
+                remark, msgCount);
     }
 
     public void delete(long id) {
@@ -55,6 +55,6 @@ public class WebownerService {
     }
 
     public void resume(long wid) {
-        dao.setStatus(wid,1);
+        dao.setStatus(wid, 1);
     }
 }
