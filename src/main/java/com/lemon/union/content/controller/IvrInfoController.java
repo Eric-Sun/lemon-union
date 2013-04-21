@@ -43,7 +43,7 @@ public class IvrInfoController {
         String ivrnum = request.getParameter("ivrnum");
         String feenum = request.getParameter("feenum");
         long id = new Long(request.getParameter("id"));
-        service.update(id, wid, channel, servicecode, ivrnum, feenum, servicecode + feenum, 1);
+        service.update(id, wid, channel, servicecode, ivrnum, feenum, ivrnum + feenum, 1);
         ModelAndView mav = new ModelAndView("forward:/content/ivrinfo/list");
         return mav;
     }
@@ -56,7 +56,7 @@ public class IvrInfoController {
         String servicecode = request.getParameter("servicecode");
         String ivrnum = request.getParameter("ivrnum");
         String feenum = request.getParameter("feenum");
-        service.create(wid, channel, servicecode, ivrnum, feenum, servicecode + feenum, 1);
+        service.create(wid, channel, servicecode, ivrnum, feenum, ivrnum + feenum, 1);
         ModelAndView mav = new ModelAndView("forward:/content/ivrinfo/list");
         return mav;
     }

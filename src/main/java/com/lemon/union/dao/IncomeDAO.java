@@ -30,17 +30,23 @@ public class IncomeDAO {
     @Autowired
     JdbcTemplate j;
 
-    public List<ProvinceIncomeDTO> queryProvinceIvrIncome(Date beginDate, Date endDate, int pageNum, int pageSize) {
+    public List<ProvinceIncomeDTO> queryProvinceIvrIncome(Long wid, Date beginDate, Date endDate, int pageNum, int pageSize) {
+        String cond = " and 1=1 ";
+        if (wid != -1)
+            cond = " and a.wid=" + wid + " ";
         String sql = "select b.province as province, count(*) as ivrcount, sum(totalincome) as ivrincome from lez_service_log" +
                 " a, api_haoduan b where a.subtime between ? and ? " +
-                "and left(a.mobile, 7) = b.mobile and a.pid = 10 group by b.province limit " + (pageNum - 1) * pageSize + "," + pageSize;
+                "and left(a.mobile, 7) = b.mobile and a.pid = 10 " + cond + "group by b.province limit " + (pageNum - 1) * pageSize + "," + pageSize;
         return j.query(sql, new Object[]{beginDate, endDate}, new BeanPropertyRowMapper<ProvinceIncomeDTO>(ProvinceIncomeDTO.class));
     }
 
-    public List<ProvinceIncomeDTO> queryProvinceSmsIncome(Date beginDate, Date endDate, int pageNum, int pageSize) {
+    public List<ProvinceIncomeDTO> queryProvinceSmsIncome(Long wid, Date beginDate, Date endDate, int pageNum, int pageSize) {
+        String cond = " and 1=1 ";
+        if (wid != -1)
+            cond = " and a.wid=" + wid + " ";
         String sql = "select b.province as province, count(*) as smscount, sum(totalincome) as smsincome from lez_service_log" +
                 " a, api_haoduan b where a.subtime between ? and ? " +
-                "and left(a.mobile, 7) = b.mobile and a.pid = 11 group by b.province  limit " + (pageNum - 1) * pageSize + "," + pageSize;
+                "and left(a.mobile, 7) = b.mobile and a.pid = 11 " + cond + "group by b.province  limit " + (pageNum - 1) * pageSize + "," + pageSize;
         return j.query(sql, new Object[]{beginDate, endDate}, new BeanPropertyRowMapper<ProvinceIncomeDTO>(ProvinceIncomeDTO.class));
     }
 

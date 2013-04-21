@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,25 +22,33 @@ public class ProvinceIncomeService {
     @Autowired
     IncomeDAO dao;
 
-    public List<ProvinceIncomeDTO> query(Date beginDate, Date endDate, int pageNum, int pageSize) {
-        List<ProvinceIncomeDTO> l1 = dao.queryProvinceIvrIncome(beginDate, endDate, pageNum, pageSize);
-        List<ProvinceIncomeDTO> l2 = dao.queryProvinceSmsIncome(beginDate, endDate, pageNum, pageSize);
+    public List<ProvinceIncomeDTO> query(long wid, Date beginDate, Date endDate, int pageNum, int pageSize) {
+        List<ProvinceIncomeDTO> l1 = dao.queryProvinceIvrIncome(wid, beginDate, endDate, pageNum, pageSize);
+        List<ProvinceIncomeDTO> l2 = dao.queryProvinceSmsIncome(wid, beginDate, endDate, pageNum, pageSize);
 
+        List<ProvinceIncomeDTO> finalList = new ArrayList<ProvinceIncomeDTO>();
         for (ProvinceIncomeDTO d1 : l1) {
-            for (ProvinceIncomeDTO d2 : l2) {
-                if (d1.equals(d2)) {
-                    d1.setSmscount(d2.getSmscount());
-                    d1.setSmsincome(d2.getSmsincome());
+            if (l2.contains(d1)) {
+                for (ProvinceIncomeDTO d2 : l2) {
+                    if (d1.equals(d2)) {
+                        d1.setSmscount(d2.getSmscount());
+                        d1.setSmsincome(d2.getSmsincome());
+                        finalList.add(d1);
+                    }
                 }
             }
         }
 
-        return l1;
+        for (ProvinceIncomeDTO d2 : l2) {
+            if (!l1.contains(d2)) {
+                finalList.add(d2);
+            }
+        }
+
+        return finalList;
     }
 
-    public int queryCount(Date beginDate, Date endDate) {
-        return dao.queryProvinceIvrIncomeCount(beginDate, endDate) +
-                dao.queryProvinceSmsIncomeCount(beginDate, endDate);
-
+    public int queryCount(Long wid, Date beginDate, Date endDate) {
+        return dao.queryProvinceSmsIncomeCount(beginDate, endDate);
     }
 }

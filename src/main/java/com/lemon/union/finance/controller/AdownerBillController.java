@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,19 +32,29 @@ public class AdownerBillController {
     AdownerBillService service;
 
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    private SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     @RequestMapping("/query")
     public ModelAndView query(HttpServletRequest request, HttpServletResponse response) throws ParseException {
-
-        String beginDateStr = request.getParameter("beginDate");
-        String endDateStr = request.getParameter("endDate");
+        String beginDateStr = null;
+        if (request.getParameter("beginDate") != null)
+            beginDateStr = request.getParameter("beginDate");
+        else {
+            beginDateStr = sdf.format(new Date(new Date().getTime() - 24 * 60 * 60 * 1000L));
+        }
+        String endDateStr = null;
+        if (request.getParameter("beginDate") != null)
+            endDateStr = request.getParameter("endDate");
+        else {
+            endDateStr = sdf.format(new Date(new Date().getTime() - 24 * 60 * 60 * 1000L));
+        }
         int pageNum = 1;
         int pageSize = 50;
         if (request.getParameter("pageNum") != null) {
             pageNum = new Integer(request.getParameter("pageNum"));
         }
-        List<AdownerBillDTO> list = service.query(sdf.parse(beginDateStr + " 00:00:00"), sdf.parse(endDateStr + " 23:59:59"), pageNum, pageSize);
-        int count = service.queryCount(sdf.parse(beginDateStr + " 00:00:00"), sdf.parse(endDateStr + " 23:59:59"));
+        List<AdownerBillDTO> list = service.query(sdf2.parse(beginDateStr + " 00:00:00"), sdf2.parse(endDateStr + " 23:59:59"), pageNum, pageSize);
+        int count = service.queryCount(sdf2.parse(beginDateStr + " 00:00:00"), sdf2.parse(endDateStr + " 23:59:59"));
         Page<AdownerBillDTO> page = PageUtil.getPage(count, pageNum, list, pageSize);
 
         ModelAndView mav = new ModelAndView("/finance/adownerbill/list");

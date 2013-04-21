@@ -28,7 +28,8 @@
                     <th>网站</th>
                     <th>地址</th>
                     <th>状态</th>
-                    <th>限额</th>
+                    <th>限额(0为无限）</th>
+                    <th>当前条数</th>
                     <th>时间</th>
                     <th>操作</th>
                 </tr>
@@ -56,6 +57,7 @@
                         </c:otherwise>
                     </c:choose>
                     <td>${dto.msgCount}</td>
+                    <td>${dto.todayCount}</td>
                     <td>${dto.regtime}</td>
                     <td>
                         <div class="btn-group">

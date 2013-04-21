@@ -11,42 +11,42 @@ import com.lemon.union.dao.RoleDAO;
 @Service
 public class RoleService {
 
-	@Autowired
-	RoleDAO roleDAO;
+    @Autowired
+    RoleDAO roleDAO;
 
-	public String getRoleName(long roleId) {
-		try {
-			return roleDAO.getRoleName(roleId);
-		} catch (Exception e) {
-			return null;
-		}
-	}
+    public String getRoleName(long roleId) {
+        try {
+            return roleDAO.getRoleName(roleId);
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
-	public long getRoleId(String roleName) {
-		try {
-			return roleDAO.getRoleId(roleName);
-		} catch (Exception e) {
-			return -1;
-		}
-	}
+    public long getRoleId(String roleName) {
+        try {
+            return roleDAO.getRoleId(roleName);
+        } catch (Exception e) {
+            return -1;
+        }
+    }
 
-	public long create(String roleName, String[] permissionIdArray) {
-		return roleDAO.create(roleName, permissionIdArray);
-	}
+    public long create(String roleName, String[] permissionIdArray) {
+        return roleDAO.create(roleName, permissionIdArray);
+    }
 
-	public void delete(long roleId) {
-		roleDAO.delete(roleId);
-	}
+    public void delete(long roleId) {
+        roleDAO.delete(roleId);
+    }
 
-	public void update(long roleId, String roleName, String[] permissionIdArray) {
-		roleDAO.update(roleId, roleName, permissionIdArray);
-	}
+    public void update(long roleId, String roleName, String[] permissionIdArray) {
+        roleDAO.update(roleId, roleName, permissionIdArray);
+    }
 
-	public List<RoleVO> getAllRole() {
-		return roleDAO.getAllRoles();
-	}
+    public List<RoleVO> getAllRole() {
+        return roleDAO.getAllRoles();
+    }
 
-	public RoleVO fetchRole(long id) {
-		return roleDAO.fetchRole(id);
-	}
+    public RoleVO fetchRole(long id) {
+        return roleDAO.fetchRole(id);
+    }
 }

@@ -20,12 +20,12 @@
     <script src="/static/js/bootstrap-datepicker.js"></script>
     <script src="/static/js/cms.js"></script>
 </head>
-<body style="background-image: url('/static/img/grid-18px-masked.png')">
+<body style="background-color: #339bb9">
 <div class="modal"
      style="position: relative; top: auto; left: auto; margin: 0 auto; z-index: 1; max-width: 100%; margin-top: 15%">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">×</button>
-        <h3>CMS Login</h3>
+        <h3>北京柠乐科技有限公司</h3>
     </div>
     <div class="modal-body">
         <form action="/passport/doLogin" method="post" name="loginForm" class="form-horizontal">

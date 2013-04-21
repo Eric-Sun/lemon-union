@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,7 +32,7 @@ public class WebownerPeriodBillController {
     @Autowired
     WebownerPeriodBillService service;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
+    private SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     @RequestMapping("/query")
     public ModelAndView query(HttpServletRequest request, HttpServletResponse response) throws ParseException {
         int pageNum = 1;
@@ -39,12 +40,22 @@ public class WebownerPeriodBillController {
         if (request.getParameter("pageNum") != null) {
             pageNum = new Integer(request.getParameter("pageNum"));
         }
-        String beginDateStr = request.getParameter("beginDate");
-        String endDateStr = request.getParameter("endDate");
-        List<WebownerPeriodBillDTO> list = service.query(sdf.parse(beginDateStr + " 00:00:00"),
-                sdf.parse(endDateStr + " 23:59:59"), pageNum, pageSize);
-        int count = service.queryCount(sdf.parse(beginDateStr + " 00:00:00"),
-                sdf.parse(endDateStr + " 23:59:59"));
+        String beginDateStr = null;
+        if (request.getParameter("beginDate") != null)
+            beginDateStr = request.getParameter("beginDate");
+        else {
+            beginDateStr = sdf.format(new Date());
+        }
+        String endDateStr = null;
+        if (request.getParameter("beginDate") != null)
+            endDateStr = request.getParameter("endDate");
+        else {
+            endDateStr = sdf.format(new Date());
+        }
+        List<WebownerPeriodBillDTO> list = service.query(sdf2.parse(beginDateStr + " 00:00:00"),
+                sdf2.parse(endDateStr + " 23:59:59"), pageNum, pageSize);
+        int count = service.queryCount(sdf2.parse(beginDateStr + " 00:00:00"),
+                sdf2.parse(endDateStr + " 23:59:59"));
         ModelAndView mav = new ModelAndView("/finance/webownerperiodbill/list");
         Page<WebownerPeriodBillDTO> page = PageUtil.getPage(count, pageNum, list, pageSize);
         mav.addObject("pageHtml", PageUtil.toPageHtml(page, request.getRequestURI(), request.getQueryString()));

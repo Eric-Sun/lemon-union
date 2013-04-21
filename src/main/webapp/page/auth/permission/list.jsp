@@ -29,8 +29,8 @@
                     <tbody>
                     <c:forEach var="permission" items="${permissionList}">
                             <td>${permission.id}</td>
+                            <td>${permission.desc}</td>
                             <td>${permission.name}</td>
-                            <td>${permission.url}</td>
                         </tr>
                     </c:forEach>
                     </tbody>

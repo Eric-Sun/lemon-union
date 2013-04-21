@@ -16,15 +16,18 @@
             <jsp:param name="current" value="0"/>
         </jsp:include>
     </div>
-    <form name="form" class="form-horizontal" method="post" action="/operator/provinceincome/query" id="form">
+    <form name="form" class="form-inline" method="post" action="/operator/provinceincome/query" id="form">
         <fieldset>
             <label class="control-label">按时间：</label>
             <input name="beginDate" id="datepicker" data-date="" data-date-format="yyyy-mm-dd" style="width: 80px;"
                    size="16" type="text" value="${param.beginDate}"> 到
             <input name="endDate" id="datepicker2" data-date="" data-date-format="yyyy-mm-dd" style="width: 80px;"
                    size="16" type="text" value="${param.endDate}">
-                    <input type="submit" class="btn btn-primary" value="查询"/>
+            <label class="control-label">网站主id：</label>
+            <input type="text" name="wid"/>
+            <input type="submit" class="btn btn-primary" value="查询"/>
         </fieldset>
+
     </form>
     <div class="body">
         <div>
@@ -55,12 +58,12 @@
 </div>
 </body>
 <script>
-//    $(document).ready(function () {
-//        $("#myTable").tablesorter({sortList: [
-//            [0, 0],
-//            [1, 0]
-//        ]});
-//    });
+    //    $(document).ready(function () {
+    //        $("#myTable").tablesorter({sortList: [
+    //            [0, 0],
+    //            [1, 0]
+    //        ]});
+    //    });
 
     $(function () {
         $("#datepicker").datepicker();

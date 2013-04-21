@@ -62,4 +62,8 @@ public class LemNewsDAO {
                 new BeanPropertyRowMapper(LemNewsDTO.class)).get(0);
     }
 
+    public int count() {
+        String sql = "select count(1) from lem_news ";
+        return j.queryForInt(sql);
+    }
 }

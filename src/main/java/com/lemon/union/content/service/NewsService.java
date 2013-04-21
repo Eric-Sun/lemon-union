@@ -11,32 +11,36 @@ import com.lemon.union.dao.LemNewsDAO;
 @Service
 public class NewsService {
 
-	@Autowired
-	LemNewsDAO dao;
+    @Autowired
+    LemNewsDAO dao;
 
-	public List<LemNewsDTO> list(int pageNum, int pageSize) {
-		return dao.list(pageNum, pageSize);
-	}
+    public List<LemNewsDTO> list(int pageNum, int pageSize) {
+        return dao.list(pageNum, pageSize);
+    }
 
-	public void create(String catalogid, String classid, String title,
-			String brief, String content, String orign, String editor,
-			String link) {
-		dao.create(catalogid, classid, title, brief, content, orign, editor,
-				link);
-	}
+    public int count() {
+        return dao.count();
+    }
 
-	public void update(long id, String catalogid, String classid, String title,
-			String brief, String content, String orign, String editor,
-			String link) {
-		dao.update(id, catalogid, classid, title, brief, content, orign,
-				editor, link);
-	}
+    public void create(String catalogid, String classid, String title,
+                       String brief, String content, String orign, String editor,
+                       String link) {
+        dao.create(catalogid, classid, title, brief, content, orign, editor,
+                link);
+    }
 
-	public void delete(long id) {
-		dao.delete(id);
-	}
+    public void update(long id, String catalogid, String classid, String title,
+                       String brief, String content, String orign, String editor,
+                       String link) {
+        dao.update(id, catalogid, classid, title, brief, content, orign,
+                editor, link);
+    }
 
-	public LemNewsDTO show(int id) {
-		return dao.show(id);
-	}
+    public void delete(long id) {
+        dao.delete(id);
+    }
+
+    public LemNewsDTO show(int id) {
+        return dao.show(id);
+    }
 }

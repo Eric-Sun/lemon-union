@@ -10,27 +10,92 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="#">Reader CMS</a>
+            <a class="brand" href="#">北京柠乐科技有限公司</a>
 
-            <div class="nav-collapse">
-                <ul class="nav">
-                    <li<%if ("0".equals(request.getParameter("top"))) {%> class="active"<%}%>><a href="/auth/user/list">用户管理</a>
-                    </li>
-                    <li<%if ("1".equals(request.getParameter("top"))) {%> class="active"<%}%>><a
-                            href="/content/adcode/list">内容管理</a>
-                    </li>
-                    <li<%if ("2".equals(request.getParameter("top"))) {%> class="active"<%}%>><a
-                            href="/page/operator/provinceincome/list.jsp">运营管理</a>
-                    </li>
-                    <li<%if ("3".equals(request.getParameter("top"))) {%> class="active"<%}%>><a
-                            href="/page/finance/adownerbill/list.jsp">财务管理</a>
-                    </li>
+            <div class="nav pull-left">
+                <li class="dropdown">
+
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">用户管理</a>
+                    <ul class="dropdown-menu">
+                        <shiro:hasPermission name="/auth/user/list">
+                            <li><a href="/auth/user/list">用户操作</a></li>
+                        </shiro:hasPermission>
+                        <shiro:hasPermission name="/auth/role/list">
+                            <li><a href="/auth/role/list">角色操作</a></li>
+                        </shiro:hasPermission>
+                        <shiro:hasPermission name="/auth/permission/list">
+                            <li><a href="/auth/permission/list">权限操作</a></li>
+                        </shiro:hasPermission>
+                    </ul>
+
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">内容管理</a>
+                    <ul class="dropdown-menu">
+                        <shiro:hasPermission name="/content/catalog/list">
+                            <li><a href="/content/catalog/list">分类管理</a></li>
+                        </shiro:hasPermission>
+                        <shiro:hasPermission name="/content/new/list">
+                            <li><a href="/content/new/list">新闻内容管理</a></li>
+                        </shiro:hasPermission>
+                        <shiro:hasPermission name="/content/adowner/list">
+                            <li><a href="/content/adowner/list">广告主管理</a></li>
+                        </shiro:hasPermission>
+                        <shiro:hasPermission name="/content/adcode/list">
+                            <li><a href="/content/adcode/list">广告主业务管理</a></li>
+                        </shiro:hasPermission>
+                        <shiro:hasPermission name="/content/product/list">
+                            <li><a href="/content/product/list">产品管理</a></li>
+                        </shiro:hasPermission>
+                        <shiro:hasPermission name="/content/webowner/list">
+                            <li><a href="/content/webowner/list">网站主管理</a></li>
+                        </shiro:hasPermission>
+                        <shiro:hasPermission name="/content/ivrinfo/list">
+                            <li><a href="/content/ivrinfo/list">ivr信息管理</a></li>
+                        </shiro:hasPermission>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">运营管理</a>
+                    <ul class="dropdown-menu">
+                        <shiro:hasPermission name="/operator/provinceincome/query">
+                            <li><a href="/operator/provinceincome/query">省份收入分析表</a></li>
+                        </shiro:hasPermission>
+                        <shiro:hasPermission name="/operator/deduct/list">
+                            <li><a href="/operator/deduct/list">利润点管理</a></li>
+                        </shiro:hasPermission>
+                        <shiro:hasPermission name="/operator/productrealtime/query">
+                            <li><a href="/operator/productrealtime/query">产品实时数据</a></li>
+                        </shiro:hasPermission>
+                        <shiro:hasPermission name="/operator/realtime/query">
+                            <li><a href="/operator/realtime/query">实时数据</a></li>
+                        </shiro:hasPermission>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">财务管理</a>
+                    <ul class="dropdown-menu">
+                        <shiro:hasPermission name="/finance/adownerbill/query">
+                            <li><a href="/finance/adownerbill/query">广告主结算收入表</a></li>
+                        </shiro:hasPermission>
+                        <shiro:hasPermission name="/finance/webownerperiodbill/query">
+                            <li><a href="/finance/webownerperiodbill/query">站长收入周期查询表</a></li>
+                        </shiro:hasPermission>
+                        <shiro:hasPermission name="/finance/bill/query">
+                            <li><a href="/finance/bill/query">日报表</a></li>
+                        </shiro:hasPermission>
+                        <shiro:hasPermission name="/finance/webownerbill/query">
+                            <li><a href="/finance/webownerbill/query">站长收入结算</a></li>
+                        </shiro:hasPermission>
+                    </ul>
+                </li>
                 </ul>
-                <ul class="nav pull-right">
-                    <li><a href="#">${sessionScope.name}</a></li>
-                    <li><a href="/passport/logout">登出</a></li>
-                </ul>
+
             </div>
+            <ul class="nav pull-right">
+                <li><a href="#">${sessionScope.name}</a></li>
+                <li><a href="/passport/logout">登出</a></li>
+            </ul>
             <!-- /.nav-collapse -->
         </div>
     </div>

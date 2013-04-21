@@ -22,7 +22,7 @@ public class PermissionVO {
 	private long id;
 	private String name;
 	private Date createTime;
-	private String url;
+	private String desc;
 	private boolean selected;
 
 	public boolean isSelected() {
@@ -33,15 +33,15 @@ public class PermissionVO {
 		this.selected = selected;
 	}
 
-	public String getUrl() {
-		return url;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public Date getCreateTime() {
+    public Date getCreateTime() {
 		return createTime;
 	}
 
@@ -57,11 +57,11 @@ public class PermissionVO {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
-	}
+    public String getDesc() {
+        return desc;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
 }

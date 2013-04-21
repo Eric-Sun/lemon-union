@@ -32,8 +32,8 @@ public class PermissionController {
 		mav.addObject("permissionList", permissionList);
 		return mav;
 	}
-	
-	
+
+
 	@RequestMapping("/jlist")
 	public String jlist(HttpServletRequest req, HttpServletResponse resp)
 			throws Exception {
@@ -84,5 +84,5 @@ public class PermissionController {
 		ModelAndView mav = new ModelAndView("/auth/permission/list");
 		return mav;
 	}
-	
+
 }

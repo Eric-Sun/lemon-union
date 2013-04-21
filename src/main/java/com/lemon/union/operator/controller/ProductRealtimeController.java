@@ -33,6 +33,7 @@ public class ProductRealtimeController {
     ProductRealtimeService service;
 
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private SimpleDateFormat sdf0 = new SimpleDateFormat("yyyy-MM-dd");
 
     @RequestMapping("/query")
     public ModelAndView query(HttpServletRequest request, HttpServletResponse response,
@@ -44,7 +45,7 @@ public class ProductRealtimeController {
                               @RequestParam(value = "cmdid", required = true, defaultValue = "") String cmdid
     ) throws ParseException {
         int pageNum = 1;
-        int pageSize = 50;
+        int pageSize = 100;
         if (request.getParameter("pageNum") != null) {
             pageNum = new Integer(request.getParameter("pageNum"));
         }
@@ -53,6 +54,9 @@ public class ProductRealtimeController {
         if (startTimeStr != null && !startTimeStr.equals("")) {
             startTime = sdf.parse(startTimeStr + " 00:00:00");
             endTime = sdf.parse(endTimeStr + " 23:59:59");
+        } else {
+            startTime = sdf.parse(sdf0.format(new Date(new Date().getTime())) + " 00:00:00");
+            endTime = sdf.parse(sdf0.format(new Date(new Date().getTime())) + " 23:59:59");
         }
 
         List<ProductRealtimeDTO> list = service.query(startTime, endTime, wid, mobile, totalincome, cmdid, pageNum, pageSize);

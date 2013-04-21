@@ -18,7 +18,7 @@
     </div>
     <ul class="breadcrumb">
         <li><a href="/page/operator/deduct/create.jsp">添加利润点</a></li>
-
+        <li><a href="/operator/deduct/fresh">更新缓存</a></li>
     </ul>
     <div class="body">
         <div>

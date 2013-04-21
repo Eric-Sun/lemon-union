@@ -17,7 +17,7 @@ public class PermissionDAO {
 
 	public List<PermissionVO> getAllPermission() {
 
-		String sql = "select id,name,url,create_time from permission";
+		String sql = "select id,name,`desc`,create_time from permission";
 		return j.query(sql, new Object[] {}, new BeanPropertyRowMapper(
 				PermissionVO.class));
 	}

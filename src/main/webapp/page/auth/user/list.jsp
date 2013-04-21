@@ -17,8 +17,7 @@
         </jsp:include>
     </div>
     <ul class="breadcrumb">
-        <li<%if ("0".equals(request.getParameter("current"))) {%> class="active" <%}%>><a data-toggle="modal"
-                                                                                          href="#userModal" onclick=user_form_add();">添加用户</a>
+        <a href="/auth/user/preCreate" >添加用户</a>
     </ul>
     <div class="body">
         <div>
@@ -40,8 +39,7 @@
                              <td>${user.roleName}</td>
                             <td class="tooltip-demo">
                                 <div class="btn-group">
-                                    <a href="#userModal" data-toggle="modal" rel="tooltip"
-                                           onclick="form_update(${user.id});"
+                                    <a href="/auth/user/show?userId=${user.id}"
                                            title="编辑"><i
                                                 class="icon-edit"></i></a>
                                     <a href="/auth/user/delete?userId=${user.id}"

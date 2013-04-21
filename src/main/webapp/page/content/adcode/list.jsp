@@ -35,8 +35,6 @@
                         <th>指令</th>
                         <th>目的号</th>
                         <th>客服电话</th>
-                        <th>限额(0为无限）</th>
-                        <th>当前条数</th>
                         <th>状态</th>
                         <th>时间</th>
                          <th>操作</th>
@@ -54,8 +52,6 @@
                         <td>${dto.ordercode}</td>
                         <td>${dto.orderdest}</td>
                         <td>${dto.servicephone}</td>
-                        <td>${dto.msgCount}</td>
-                        <td>${dto.todayCount}</td>
                         <c:choose>
                             <c:when test="${dto.status==1}">
                                 <td>正常</td>

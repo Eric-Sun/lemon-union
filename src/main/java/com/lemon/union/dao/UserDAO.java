@@ -74,7 +74,7 @@ public class UserDAO {
     }
 
     public void update(long userId, String name, String pwd, long roleId) {
-        String sql = "update user set name=?,pwd=?,role_id=? where id=?";
+        String sql = "update user set name=?,pwd=md5(?),role_id=? where id=?";
         j.update(sql, new Object[]{name, pwd, roleId, userId});
 
     }

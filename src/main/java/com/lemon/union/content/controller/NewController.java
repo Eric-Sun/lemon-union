@@ -6,6 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSON;
+import com.lemon.union.operator.dto.ProductRealtimeDTO;
+import com.lemon.union.tools.Page;
+import com.lemon.union.tools.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,9 +34,12 @@ public class NewController {
         if (request.getParameter("pageNum") != null)
             pageNum = new Integer(request.getParameter("pageNum"));
         List<LemNewsDTO> list = service.list(pageNum, pageSize);
+        int count = service.count();
 
         ModelAndView mav = new ModelAndView("/content/new/list");
         mav.addObject("list", list);
+        Page<LemNewsDTO> page = PageUtil.getPage(count, pageNum, list, pageSize);
+        mav.addObject("pageHtml", PageUtil.toPageHtml(page, request.getRequestURI(), request.getQueryString()));
         return mav;
     }
 

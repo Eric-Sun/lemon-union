@@ -94,6 +94,14 @@ public class DeductScaleController {
         return mav;
     }
 
+    @RequestMapping("/fresh")
+    public ModelAndView fresh(HttpServletRequest request,
+                              HttpServletResponse response) {
+        ModelAndView mav = new ModelAndView("forward:/operator/deduct/list");
+        call();
+        return mav;
+    }
+
 
     private void call() {
         try {

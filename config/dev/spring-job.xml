@@ -20,7 +20,7 @@
     <bean id="DayUpdateJobQuartz" class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail" ref="DayUpdateJob" />
         <property name="cronExpression">
-            <value>0 50 2 * * ?</value>
+            <value>0 28 10 * * ?</value>
         </property>
     </bean>
 

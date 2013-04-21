@@ -4,8 +4,11 @@ import com.lemon.union.content.dto.WebownerDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
@@ -50,5 +53,24 @@ public class WebownerDAO {
     public void setStatus(long wid, int status) {
         String sql = "update lem_webowner set status=? where wid=?";
         j.update(sql, new Object[]{status, wid});
+    }
+
+    public List<Object[]> showprovince(long wid) {
+        String sql = "select province,msg_count,today_count from webowner_province where wid=?";
+        return j.query(sql, new Object[]{wid}, new RowMapper<Object[]>() {
+            @Override
+            public Object[] mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Object[] o = new Object[3];
+                o[0] = rs.getString(1);
+                o[1] = rs.getInt(2);
+                o[2] = rs.getInt(3);
+                return o;
+            }
+        });
+    }
+
+    public void update(long wid, String province, Integer count) {
+        String sql = "update webowner_province set msg_count=? where province=? and wid=?";
+        j.update(sql, new Object[]{count, province, wid});
     }
 }

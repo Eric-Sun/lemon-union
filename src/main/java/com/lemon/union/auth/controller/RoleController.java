@@ -25,67 +25,78 @@ import com.lemon.union.service.RoleService;
 @RequestMapping("/auth/role")
 public class RoleController {
 
-	@Autowired
-	RoleService roleService;
-	
-	@Autowired
-	PermissionService permissionService;
+    @Autowired
+    RoleService roleService;
 
-	@RequestMapping("/list")
-	public ModelAndView list(HttpServletRequest req, HttpServletResponse resp)
-			throws Exception {
+    @Autowired
+    PermissionService permissionService;
 
-		List<RoleVO> userList = roleService.getAllRole();
-		ModelAndView mav = new ModelAndView("/auth/role/list");
-		mav.addObject("roleList", userList);
-		return mav;
-	}
+    @RequestMapping("/list")
+    public ModelAndView list(HttpServletRequest req, HttpServletResponse resp)
+            throws Exception {
 
-	@RequestMapping("/delete")
-	public ModelAndView delete(HttpServletRequest req, HttpServletResponse resp)
-			throws Exception {
-		long id = new Long(req.getParameter("id"));
-		roleService.delete(id);
-		ModelAndView mav = new ModelAndView("redirect:/auth/role/list");
-		return mav;
-	}
+        List<RoleVO> userList = roleService.getAllRole();
+        ModelAndView mav = new ModelAndView("/auth/role/list");
+        mav.addObject("roleList", userList);
+        return mav;
+    }
 
-	@RequestMapping("/create")
-	public ModelAndView create(HttpServletRequest req, HttpServletResponse resp)
-			throws Exception {
-		String name = req.getParameter("name");
-		String[] permissionIdArray = req
-				.getParameterValues("permissionIdArray");
-		roleService.create(name, permissionIdArray);
-		ModelAndView mav = new ModelAndView("redirect:/auth/role/list");
-		return mav;
-	}
+    @RequestMapping("/delete")
+    public ModelAndView delete(HttpServletRequest req, HttpServletResponse resp)
+            throws Exception {
+        long id = new Long(req.getParameter("id"));
+        roleService.delete(id);
+        ModelAndView mav = new ModelAndView("redirect:/auth/role/list");
+        return mav;
+    }
 
-	@RequestMapping("/update")
-	public ModelAndView update(HttpServletRequest req, HttpServletResponse resp)
-			throws Exception {
-		long id = new Long(req.getParameter("id"));
-		String name = req.getParameter("name");
-		String[] permissionIdArray = req
-				.getParameterValues("permissionIdArray");
-		roleService.update(id, name, permissionIdArray);
-		ModelAndView mav = new ModelAndView("redirect:/auth/role/list");
-		return mav;
-	}
+    @RequestMapping("/create")
+    public ModelAndView create(HttpServletRequest req, HttpServletResponse resp)
+            throws Exception {
+        String name = req.getParameter("name");
+        String[] permissionIdArray = req
+                .getParameterValues("permissionIdArray");
+        roleService.create(name, permissionIdArray);
+        ModelAndView mav = new ModelAndView("redirect:/auth/role/list");
+        return mav;
+    }
 
-	@RequestMapping("/fetch")
-	@ResponseBody
-	public String fetch(HttpServletRequest req, HttpServletResponse resp)
-			throws Exception {
-		long id = new Long(req.getParameter("id"));
-		RoleVO roleVO = roleService.fetchRole(id);
-		List<PermissionVO> pList = permissionService.getAllPermission();
-		for( PermissionVO vo : pList){
-			if(roleVO.getPermissionList().contains(vo))
-				vo.setSelected(true);
-		}
-		roleVO.setPermissionList(pList);
-		return JSON.toJSONString(roleVO);
-	}
+    @RequestMapping("/preCreate")
+    public ModelAndView preCreate(HttpServletRequest req, HttpServletResponse resp) {
+        List<PermissionVO> permissionList = permissionService
+                .getAllPermission();
+        ModelAndView mav = new ModelAndView("/auth/role/create");
+        mav.addObject("permissionList", permissionList);
+        return mav;
+    }
+
+
+    @RequestMapping("/update")
+    public ModelAndView update(HttpServletRequest req, HttpServletResponse resp)
+            throws Exception {
+        long id = new Long(req.getParameter("id"));
+        String name = req.getParameter("name");
+        String[] permissionIdArray = req
+                .getParameterValues("permissionIdArray");
+        roleService.update(id, name, permissionIdArray);
+        ModelAndView mav = new ModelAndView("redirect:/auth/role/list");
+        return mav;
+    }
+
+    @RequestMapping("/show")
+    public ModelAndView show(HttpServletRequest req, HttpServletResponse resp)
+            throws Exception {
+        long id = new Long(req.getParameter("id"));
+        RoleVO roleVO = roleService.fetchRole(id);
+        List<PermissionVO> pList = permissionService.getAllPermission();
+        for (PermissionVO vo : pList) {
+            if (roleVO.getPermissionList().contains(vo))
+                vo.setSelected(true);
+        }
+        roleVO.setPermissionList(pList);
+        ModelAndView mav = new ModelAndView("/auth/role/show");
+        mav.addObject("roleVO", roleVO);
+        return mav;
+    }
 
 }
