@@ -10,8 +10,11 @@ import com.lemon.union.operator.dto.RealtimeDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -204,5 +207,27 @@ public class IncomeDAO {
     public void pay(int type, String ids) {
         String sql = "update lez_webowner_bill set payflag =?, paytime = ? where id in (" + ids + ")";
         j.update(sql, new Object[]{type, new Date()});
+    }
+
+    public List<Object[]> getLastMobile(int count) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+
+        String sql = "select mobile,count(1) from lez_service_log " +
+                "where subtime between ? and ? " +
+                "group by mobile having count(1)>=?";
+        return j.query(sql, new Object[]{cal.getTime(), new Date(), count}, new RowMapper<Object[]>() {
+            @Override
+            public Object[] mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Object[] o = new Object[2];
+                o[0] = rs.getString(1);
+                o[1] = rs.getString(2);
+                return o;
+            }
+        });
     }
 }

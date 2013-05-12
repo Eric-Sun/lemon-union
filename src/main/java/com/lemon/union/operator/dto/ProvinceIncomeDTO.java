@@ -15,7 +15,7 @@ public class ProvinceIncomeDTO {
 
         ProvinceIncomeDTO that = (ProvinceIncomeDTO) o;
 
-        if (province != null ? !province.equals(that.province) : that.province != null) return false;
+        if (province == null || !this.province.equals(that.province)) return false;
 
         return true;
     }

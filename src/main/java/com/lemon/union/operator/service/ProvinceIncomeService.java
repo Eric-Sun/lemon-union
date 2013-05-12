@@ -26,7 +26,7 @@ public class ProvinceIncomeService {
         List<ProvinceIncomeDTO> l1 = dao.queryProvinceIvrIncome(wid, beginDate, endDate, pageNum, pageSize);
         List<ProvinceIncomeDTO> l2 = dao.queryProvinceSmsIncome(wid, beginDate, endDate, pageNum, pageSize);
 
-        List<ProvinceIncomeDTO> finalList = new ArrayList<ProvinceIncomeDTO>();
+        List<ProvinceIncomeDTO> finalList = new ArrayList<ProvinceIncomeDTO>(20);
         for (ProvinceIncomeDTO d1 : l1) {
             if (l2.contains(d1)) {
                 for (ProvinceIncomeDTO d2 : l2) {
@@ -40,8 +40,14 @@ public class ProvinceIncomeService {
         }
 
         for (ProvinceIncomeDTO d2 : l2) {
-            if (!l1.contains(d2)) {
+            if (!finalList.contains(d2)) {
                 finalList.add(d2);
+            }
+        }
+
+        for (ProvinceIncomeDTO d1 : l1) {
+            if (!finalList.contains(d1)) {
+                finalList.add(d1);
             }
         }
 

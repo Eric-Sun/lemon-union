@@ -243,6 +243,13 @@
                     <input type="text" name="hunan"  value="${map['hunan']}">
                 </div>
             </div>
+            <div class="control-group">
+                <label class="control-label">未知</label>
+
+                <div class="controls">
+                    <input type="text" name="weizhi"  value="${map['weizhi']}">
+                </div>
+            </div>
 
 
             <div class="control-group">

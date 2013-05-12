@@ -6,13 +6,18 @@ import com.lemon.union.operator.service.ProductRealtimeService;
 import com.lemon.union.tools.Page;
 import com.lemon.union.tools.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,6 +36,9 @@ public class ProductRealtimeController {
 
     @Autowired
     ProductRealtimeService service;
+
+    @Value("${excel.output.path}")
+    String path;
 
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private SimpleDateFormat sdf0 = new SimpleDateFormat("yyyy-MM-dd");
@@ -66,6 +74,16 @@ public class ProductRealtimeController {
         mav.addObject("pageHtml", PageUtil.toPageHtml(page, request.getRequestURI(), request.getQueryString()));
         mav.addObject("list", list);
         return mav;
+    }
+
+    @RequestMapping(value = "/getLastMobile", method = RequestMethod.GET)
+    public void getLastMobile(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        int count = new Integer(request.getParameter("count"));
+        response.setContentType("application/octet-stream");
+        response.setHeader("Content-Disposition", "attachment;filename=mobile.txt");
+        String filePath = service.getLastMobile(path, count, response);
+
     }
 
 }

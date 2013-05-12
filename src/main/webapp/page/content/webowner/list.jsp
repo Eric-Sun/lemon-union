@@ -37,7 +37,8 @@
                 <tbody>
                 <c:forEach var="dto" items="${list}">
                     <td>${dto.wid}</td>
-                    <td>${dto.username}</td>
+                    <td><a href="/content/webowner/showprovince?wid=<c:out value='${dto.wid}'/>">${dto.username}</a>
+                    </td>
                     <td>${dto.channel}</td>
                     <td>${dto.truename}</td>
                     <td>${dto.siteurl}</td>

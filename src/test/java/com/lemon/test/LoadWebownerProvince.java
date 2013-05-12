@@ -34,6 +34,15 @@ public class LoadWebownerProvince {
         pstmt.close();
         for (Long wid : list) {
             for (String p : Constants.provinceMap.keySet()) {
+                String s3 = "select count(1) from webowner_province where wid=? and province=?";
+                PreparedStatement p3 = conn.prepareStatement(s3);
+                p3.setLong(1, wid);
+                p3.setString(2, Constants.provinceMap.get(p));
+                ResultSet rs3 = p3.executeQuery();
+                rs3.next();
+                int count = rs3.getInt(1);
+                if (count == 1)
+                    continue;
                 String s2 = "insert into webowner_province (wid,province,province2) values(?,?,?)";
                 PreparedStatement p2 = conn.prepareStatement(s2);
                 p2.setLong(1, wid);

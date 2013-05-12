@@ -15,7 +15,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Constants {
 
     public static Map<String, String> provinceMap = new ConcurrentHashMap<String, String>();
-    static{
+
+    static {
         provinceMap.put("山东", "shandong");
         provinceMap.put("江苏", "jiangsu");
         provinceMap.put("安徽", "anhui");
@@ -47,6 +48,7 @@ public class Constants {
         provinceMap.put("新疆", "xinjiang");
         provinceMap.put("黑龙江", "heilongjiang");
         provinceMap.put("西藏", "xizang");
+        provinceMap.put("未知", "weizhi");
     }
 
 }

@@ -16,6 +16,12 @@
             <jsp:param name="current" value="3"/>
         </jsp:include>
     </div>
+    <ul class="breadcrumb">
+        <form action="/operator/productrealtime/getLastMobile">
+            次数：<input type="text" name="count" value="3"/>
+            <input type="submit" value="获取昨天手机号"></a>
+        </form>
+    </ul>
     <form name="form" class="form-horizontal" method="post" action="/operator/realtime/query" id="form">
         <fieldset>
             <input type="submit" class="btn btn-primary" value="查询"/>
