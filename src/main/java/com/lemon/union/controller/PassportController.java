@@ -62,4 +62,17 @@ public class PassportController {
         return "/passport/login";
 
     }
+
+
+    @RequestMapping("/modifyPassword")
+    public String modifyPassword(HttpServletRequest req, HttpServletResponse resp)
+            throws Exception {
+        String name = (String) req.getSession().getAttribute("name");
+        String oldpwd = req.getParameter("oldpwd");
+        String newpwd = req.getParameter("newpwd");
+        if (userService.modifyPassowrd(name, oldpwd, newpwd))
+            return "/auth/modifyok";
+        else
+            return "/auth/modifyfail";
+    }
 }

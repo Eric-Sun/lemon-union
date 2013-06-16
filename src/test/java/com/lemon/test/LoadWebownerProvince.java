@@ -32,6 +32,8 @@ public class LoadWebownerProvince {
         }
         rs.close();
         pstmt.close();
+        list.clear();
+        list.add(1073L);
         for (Long wid : list) {
             for (String p : Constants.provinceMap.keySet()) {
                 String s3 = "select count(1) from webowner_province where wid=? and province=?";

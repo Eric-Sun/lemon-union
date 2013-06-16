@@ -25,6 +25,7 @@ public class Lez_webowner_channel_day {
     private float totalincome;
     private String subtime;
 
+
     public Integer getId()
     {
         return this.id;

@@ -19,14 +19,14 @@ public class OutputMobileData {
     private static String url = "jdbc:mysql://211.144.137.66:3306/lemon2";
     private static String user = "lemon";
     private static String password = "lemon001)(";
-    private static String fileName = "d:\\mobile_" + System.currentTimeMillis() + ".txt";
+    private static String fileName = "d:\\mobile2_" + System.currentTimeMillis() + ".txt";
 
     public static void main(String[] args) throws Exception {
         Class.forName("com.mysql.jdbc.Driver");
         Connection conn = DriverManager.getConnection(url, user, password);
         PreparedStatement pstmt = conn.prepareStatement("" +
                 "select mobile,count(1) from lez_service_log " +
-                "where subtime between '2013-05-02 00:00:00' and '2013-05-03 00:00:00' " +
+                "where subtime between '2013-05-01 00:00:00' and '2013-05-27 00:00:00' " +
                 "group by mobile having count(1)>=3");
         ResultSet rs = pstmt.executeQuery();
         FileWriter fw = new FileWriter(new File(fileName));

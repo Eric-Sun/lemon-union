@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -40,13 +41,19 @@ public class AdownerBillController {
         if (request.getParameter("beginDate") != null)
             beginDateStr = request.getParameter("beginDate");
         else {
-            beginDateStr = sdf.format(new Date(new Date().getTime() - 24 * 60 * 60 * 1000L));
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(new Date());
+            cal.set(Calendar.DAY_OF_MONTH, 1);
+            cal.set(Calendar.HOUR_OF_DAY, 0);
+            cal.set(Calendar.MINUTE, 0);
+            cal.set(Calendar.SECOND, 0);
+            beginDateStr = sdf.format(cal.getTime());
         }
         String endDateStr = null;
         if (request.getParameter("beginDate") != null)
             endDateStr = request.getParameter("endDate");
         else {
-            endDateStr = sdf.format(new Date(new Date().getTime() - 24 * 60 * 60 * 1000L));
+            endDateStr = sdf.format(new Date());
         }
         int pageNum = 1;
         int pageSize = 50;

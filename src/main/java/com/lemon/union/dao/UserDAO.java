@@ -98,4 +98,13 @@ public class UserDAO {
         return kh.getKey().longValue();
     }
 
+    public boolean modifyPassowrd(String name, String oldpwd, String newpwd) {
+        String s1 = "select count(1) from user where name = ? and pwd=md5(?)";
+        int count = j.queryForInt(s1, new Object[]{name, oldpwd});
+        if (count != 1)
+            return false;
+        String s2 = "update user set pwd=md5(?) where name=? and pwd=md5(?)";
+        j.update(s2, new Object[]{newpwd, name, oldpwd});
+        return true;
+    }
 }

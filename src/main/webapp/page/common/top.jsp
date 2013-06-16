@@ -17,6 +17,7 @@
 
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">用户管理</a>
                     <ul class="dropdown-menu">
+                        <li><a href="/page/auth/modifyPassword.jsp">修改密码</a></li>
                         <shiro:hasPermission name="/auth/user/list">
                             <li><a href="/auth/user/list">用户操作</a></li>
                         </shiro:hasPermission>
