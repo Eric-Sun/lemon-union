@@ -22,9 +22,10 @@ public class ProvinceIncomeService {
     @Autowired
     IncomeDAO dao;
 
-    public List<ProvinceIncomeDTO> query(long wid, Date beginDate, Date endDate, int pageNum, int pageSize) {
-        List<ProvinceIncomeDTO> l1 = dao.queryProvinceIvrIncome(wid, beginDate, endDate, pageNum, pageSize);
-        List<ProvinceIncomeDTO> l2 = dao.queryProvinceSmsIncome(wid, beginDate, endDate, pageNum, pageSize);
+    public List<ProvinceIncomeDTO> query(long wid, String adid, String cmd, String orderdest,
+                                         Date beginDate, Date endDate, int pageNum, int pageSize,String servicecode) {
+        List<ProvinceIncomeDTO> l1 = dao.queryProvinceIvrIncome(wid, adid, cmd, orderdest, beginDate, endDate, pageNum, pageSize,servicecode);
+        List<ProvinceIncomeDTO> l2 = dao.queryProvinceSmsIncome(wid, adid, cmd, orderdest, beginDate, endDate, pageNum, pageSize,servicecode);
 
         List<ProvinceIncomeDTO> finalList = new ArrayList<ProvinceIncomeDTO>(20);
         for (ProvinceIncomeDTO d1 : l1) {

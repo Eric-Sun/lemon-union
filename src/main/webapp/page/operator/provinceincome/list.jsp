@@ -25,6 +25,14 @@
                    size="16" type="text" value="${param.endDate}">
             <label class="control-label">网站主id：</label>
             <input type="text" name="wid"/>
+            <label class="control-label">广告主：</label>
+            <input type="text" name="adid"/>
+            <label class="control-label">指令：</label>
+            <input type="text" name="cmd"/>
+            <label class="control-label">点播号：</label>
+            <input type="text" name="orderdest"/>
+            <label class="control-label">代码：</label>
+            <input type="text" name="servicecode"/>
             <input type="submit" class="btn btn-primary" value="查询"/>
         </fieldset>
 

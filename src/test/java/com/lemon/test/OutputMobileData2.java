@@ -25,7 +25,7 @@ public class OutputMobileData2 {
         Connection conn = DriverManager.getConnection(url, user, password);
         PreparedStatement pstmt = conn.prepareStatement("" +
                 "select l.mobile,l.subtime from (select mobile,count(1) from lez_service_log " +
-                "where subtime between '2013-05-01 00:00:00' and '2013-05-20 00:00:00' " +
+                "where subtime between '2013-06-01 00:00:00' and now() " +
                 "group by mobile having count(1)>=3 ) b,lez_service_log l where l.mobile=b.mobile and l.subtime between '2013-05-01 00:00:00' and '2013-05-20 00:00:00'");
         ResultSet rs = pstmt.executeQuery();
         FileWriter fw = new FileWriter(new File(fileName));

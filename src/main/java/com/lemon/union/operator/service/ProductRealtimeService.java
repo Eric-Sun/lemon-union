@@ -27,8 +27,10 @@ public class ProductRealtimeService {
         return dao.queryForProductRealTimeCount(startTime, endTime, wid, mobile, totalincome, cmdid);
     }
 
-    public List<ProductRealtimeDTO> query(Date startTime, Date endTime, Integer wid, String mobile, String totalincome, String cmdid, int pageNum, int pageSize) {
-        return dao.queryForProductRealTime(startTime, endTime, wid, mobile, totalincome, cmdid, pageNum, pageSize);
+    public List<ProductRealtimeDTO> query(Date startTime, Date endTime, Integer wid, String mobile, String totalincome,
+                                          String cmdid, String orderdest, String feeflag, int pageNum, int pageSize) {
+        return dao.queryForProductRealTime(startTime, endTime, wid, mobile, totalincome, cmdid, orderdest, feeflag,
+                pageNum, pageSize);
     }
 
     public String getLastMobile(String path, int count, HttpServletResponse response) throws IOException {

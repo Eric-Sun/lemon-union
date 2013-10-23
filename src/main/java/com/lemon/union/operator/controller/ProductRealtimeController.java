@@ -50,7 +50,9 @@ public class ProductRealtimeController {
                               @RequestParam(value = "endTime", required = true, defaultValue = "") String endTimeStr,
                               @RequestParam(value = "mobile", required = true, defaultValue = "") String mobile,
                               @RequestParam(value = "totalincome", required = true, defaultValue = "") String totalincome,
-                              @RequestParam(value = "cmdid", required = true, defaultValue = "") String cmdid
+                              @RequestParam(value = "cmdid", required = true, defaultValue = "") String cmdid,
+                              @RequestParam(value = "orderdest", required = true, defaultValue = "") String orderdest,
+                              @RequestParam(value = "feeflag", required = true, defaultValue = "") String feeflag
     ) throws ParseException {
         int pageNum = 1;
         int pageSize = 100;
@@ -67,7 +69,7 @@ public class ProductRealtimeController {
             endTime = sdf.parse(sdf0.format(new Date(new Date().getTime())) + " 23:59:59");
         }
 
-        List<ProductRealtimeDTO> list = service.query(startTime, endTime, wid, mobile, totalincome, cmdid, pageNum, pageSize);
+        List<ProductRealtimeDTO> list = service.query(startTime, endTime, wid, mobile, totalincome, cmdid, orderdest, feeflag, pageNum, pageSize);
         int count = service.queryCount(startTime, endTime, wid, mobile, totalincome, cmdid);
         ModelAndView mav = new ModelAndView("/operator/productrealtime/list");
         Page<ProductRealtimeDTO> page = PageUtil.getPage(count, pageNum, list, pageSize);

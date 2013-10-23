@@ -36,12 +36,12 @@ public class DayUpdateJob extends QuartzJobBean {
         if (this.run) {
 
             Map dataMap = context.getJobDetail().getJobDataMap();
-            ApplicationContext ctx = (ApplicationContext)dataMap.get("applicationContext");
+            ApplicationContext ctx = (ApplicationContext) dataMap.get("applicationContext");
             Calendar ca = Calendar.getInstance();
             ca.add(Calendar.DAY_OF_YEAR, -1);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String subdate = sdf.format(ca.getTime());
-            boolean flag = executeProcedure(ctx,subdate);
+            boolean flag = executeProcedure(ctx, subdate);
             if (!flag)
                 this.log.error(context.getJobDetail().getName() + "," + subdate + ": failed!");
             else

@@ -20,8 +20,8 @@ public class WebownerBillService {
     @Autowired
     IncomeDAO dao;
 
-    public List<WebownerBillDTO> query(int pageNum, int pageSize) {
-        return dao.queryForWebownerBill(pageNum, pageSize);
+    public List<WebownerBillDTO> query(String wid,String pid,int pageNum, int pageSize) {
+        return dao.queryForWebownerBill(wid,pid,pageNum, pageSize);
     }
 
     public int queryCount() {

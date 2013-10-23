@@ -33,29 +33,67 @@ public class IncomeDAO {
     @Autowired
     JdbcTemplate j;
 
-    public List<ProvinceIncomeDTO> queryProvinceIvrIncome(Long wid, Date beginDate, Date endDate, int pageNum, int pageSize) {
+    public List<ProvinceIncomeDTO> queryProvinceIvrIncome(Long wid, String adid, String cmd, String orderdest, Date beginDate, Date endDate,
+                                                          int pageNum, int pageSize, String servicecode) {
         String cond = " and 1=1 ";
         if (wid != -1)
             cond = " and a.wid=" + wid + " ";
+        String cond1 = " and 1=1 ";
+        if (!"".equals(adid)) {
+            cond1 = " and a.adid =" + adid + " ";
+        }
+        String cond2 = " and 1=1 ";
+        if (!"".equals(cmd)) {
+            cond2 = " and a.ordercode ='" + cmd + "' ";
+        }
+        String cond3 = " and 1=1 ";
+        if (!"".equals(orderdest)) {
+            cond3 = " and a.orderdest ='" + orderdest + "' ";
+        }
+        String cond4 = " and 1=1";
+        if (!"".equals(servicecode)) {
+            cond4 = " and a.servicecode='" + servicecode + "' ";
+        }
+
         String sql = "select b.province as province, count(*) as ivrcount, sum(totalincome) as ivrincome from lez_service_log" +
                 " a, api_haoduan b where a.subtime between ? and ? " +
-                "and left(a.mobile, 7) = b.mobile and a.pid = 10 " + cond + "group by b.province limit " + (pageNum - 1) * pageSize + "," + pageSize;
+                "and left(a.mobile, 7) = b.mobile and a.pid = 10 " + cond + cond1 + cond2 + cond3 + cond4 + "group by b.province limit " + (pageNum - 1) * pageSize + "," + pageSize;
         return j.query(sql, new Object[]{beginDate, endDate}, new BeanPropertyRowMapper<ProvinceIncomeDTO>(ProvinceIncomeDTO.class));
     }
 
-    public List<ProvinceIncomeDTO> queryProvinceSmsIncome(Long wid, Date beginDate, Date endDate, int pageNum, int pageSize) {
+    public List<ProvinceIncomeDTO> queryProvinceSmsIncome(Long wid, String adid, String cmd,
+                                                          String orderdest, Date beginDate, Date endDate, int pageNum, int pageSize, String servicecode) {
+        String cond1 = " and 1=1 ";
+        if (!"".equals(adid)) {
+            cond1 = " and a.adid =" + adid + " ";
+        }
+        String cond2 = " and 1=1 ";
+        if (!"".equals(cmd)) {
+            cond2 = " and a.ordercode ='" + cmd + "' ";
+        }
+        String cond3 = " and 1=1 ";
+        if (!"".equals(orderdest)) {
+            cond3 = " and a.orderdest ='" + orderdest + "' ";
+        }
         String cond = " and 1=1 ";
         if (wid != -1)
             cond = " and a.wid=" + wid + " ";
+
+        String cond4 = " and 1=1";
+        if (!"".equals(servicecode)) {
+            cond4 = " and a.servicecode='" + servicecode + "' ";
+        }
+
+
         String sql = "select b.province as province, count(*) as smscount, sum(totalincome) as smsincome from lez_service_log" +
                 " a, api_haoduan b where a.subtime between ? and ? " +
-                "and left(a.mobile, 7) = b.mobile and a.pid = 11 " + cond + "group by b.province  limit " + (pageNum - 1) * pageSize + "," + pageSize;
+                "and left(a.mobile, 7) = b.mobile and a.pid = 11 " + cond + cond1 + cond2 + cond3 + cond4 + "group by b.province  limit " + (pageNum - 1) * pageSize + "," + pageSize;
         return j.query(sql, new Object[]{beginDate, endDate}, new BeanPropertyRowMapper<ProvinceIncomeDTO>(ProvinceIncomeDTO.class));
     }
 
 
     public List<ProductRealtimeDTO> queryForProductRealTime(Date startTime, Date endTime, Integer wid, String mobile, String totalincome,
-                                                            String cmdid, int pageNum, int pageSize) {
+                                                            String cmdid, String orderdest, String feeflag, int pageNum, int pageSize) {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String timeCond = " subtime >= date_add(now(), interval -1 day) and subtime<now() ";
@@ -76,9 +114,14 @@ public class IncomeDAO {
         if (cmdid != null && !cmdid.equals("")) {
             cmdidCond = " and ordercode='" + cmdid + "'";
         }
-
+        String cond2 = " and 1=1 ";
+        if (!orderdest.equals(""))
+            cond2 = " and orderdest ='" + orderdest + "'";
+        String cond3 = " and 1=1 ";
+        if (!feeflag.equals(""))
+            cond3 = " and FeeFlag=" + feeflag + "";
         String sql = "select id, wid, channel, pid, mobile, ordercode, orderdest, totalincome, feeincome, feeflag, subtime" +
-                " from lez_service_log where " + timeCond + widCond + mobileCond + totalincomeCond + cmdidCond + "order by subtime desc limit " + (pageNum - 1) * pageSize + "," + pageSize;
+                " from lez_service_log where " + timeCond + cond2 + cond3 + widCond + mobileCond + totalincomeCond + cmdidCond + "order by subtime desc limit " + (pageNum - 1) * pageSize + "," + pageSize;
         ;
         return j.query(sql, new Object[]{}, new BeanPropertyRowMapper<ProductRealtimeDTO>(ProductRealtimeDTO.class));
     }
@@ -117,9 +160,17 @@ public class IncomeDAO {
         return j.query(sql, new Object[]{beginDate, endDate}, new BeanPropertyRowMapper<WebownerPeriodBillDTO>(WebownerPeriodBillDTO.class));
     }
 
-    public List<WebownerBillDTO> queryForWebownerBill(int pageNum, int pageSize) {
+    public List<WebownerBillDTO> queryForWebownerBill(String wid, String pid, int pageNum, int pageSize) {
+        String c1 = " and 1=1 ";
+        if (!"".equals(wid)) {
+            c1 = " and wid=" + wid + " ";
+        }
+        String c2 = " and 1=1 ";
+        if (!"".equals(pid)) {
+            c2 = " and pid=" + pid + " ";
+        }
         String sql = "select id, billdate, wid, pid, showcount, showincome, feecount, feeincome, totalincome, payflag, paytime " +
-                "from lez_webowner_bill order by billdate desc limit " + (pageNum - 1) * pageSize + "," + pageSize;
+                "from lez_webowner_bill where 1=1" + c1 + c2 + " order by billdate desc limit " + (pageNum - 1) * pageSize + "," + pageSize;
         return j.query(sql, new Object[]{}, new BeanPropertyRowMapper<WebownerBillDTO>(WebownerBillDTO.class));
     }
 

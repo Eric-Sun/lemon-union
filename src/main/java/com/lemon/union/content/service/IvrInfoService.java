@@ -27,7 +27,12 @@ public class IvrInfoService {
     private IvrInfoDAO dao;
 
     public List<IvrInfoDTO> list() {
-        return dao.list();
+        List<IvrInfoDTO> list = dao.list();
+        for (IvrInfoDTO ivr : list) {
+            int count = dao.getCount(ivr.getServicecode());
+            ivr.setCurCount(count);
+        }
+        return list;
     }
 
     public IvrInfoDTO show(long id) {

@@ -7,9 +7,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.stereotype.Repository;
 
+import javax.xml.crypto.Data;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -68,4 +71,12 @@ public class IvrInfoDAO {
         String sql = "delete from lem_ivr_info where id=?";
         j.update(sql, new Object[]{id});
     }
+
+    public int getCount(String serviceCode) {
+        Date d = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String sql = "select count(1) from lez_service_log where servicecode=? and subtime between ? and ?";
+        return j.queryForInt(sql, new Object[]{serviceCode, sdf.format(d) + " 00:00:00", sdf.format(d) + " 23:59:59"});
+    }
+
 }

@@ -1,5 +1,7 @@
 package com.lemon.union.dao;
 
+import com.lemon.union.job.A1;
+import com.lemon.union.job.A2;
 import com.lemon.union.job.Lez_webowner_channel_day;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -113,27 +115,36 @@ public class SchedulerJobDAO {
         try {
             String sql1 = "delete from lez_webowner_channel_day where subdate = ?";
             j.update(sql1, new Object[]{subdate});
-            final String sql2 = "insert lez_webowner_channel_day(subdate, wid, pid, channel, feecount, feeusers, feeincome, showcount, showincome, totalincome, subtime) select subdate, wid, pid, channel, sum(feecount), sum(feeusers), sum(feeincome), sum(showcount), sum(showincome), sum(totalincome), now() from lez_bill_day where subdate = ? group by subdate, wid, pid, channel";
-            j.update(new PreparedStatementCreator() {
-                @Override
-                public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
-                    PreparedStatement pstmt = con.prepareStatement(sql2);
-                    pstmt.setString(1, subdate);
-                    return pstmt;
-                }
-            });
+            final String sql2 = "select subdate, wid, pid, channel, sum(feecount) as feecount, sum(feeusers) as feeusers, " +
+                    "sum(feeincome) as feeincome, sum(showcount) as showcount, sum(showincome) as showincome, sum(totalincome) as totalincome, now() as subtime from lez_bill_day where subdate = ? group by subdate, wid, pid, channel";
+
+            List<A1> list = j.query(sql2, new Object[]{subdate}, new BeanPropertyRowMapper<A1>(A1.class));
+            for (A1 a : list) {
+                String s2 = "insert lez_webowner_channel_day (subdate, wid, pid, channel, feecount, feeusers, feeincome, showcount, showincome, totalincome, subtime) values(" +
+                        "?,?,?,?,?,?,?,?,?,?,?)";
+                j.update(s2, new Object[]{a.getSubdate(), a.getWid(), a.getPid(), a.getChannel(), a.getFeecount(), a.getFeeusers(),
+                        a.getFeeincome(), a.getShowcount(), a.getShowincome(), a.getTotalincome(), a.getNow()});
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
+
+
 
     public void analyzeWebowner(String subdate) {
         try {
             String sql1 = "delete from lez_webowner_bill where billdate = ? and payflag = 0";
             j.update(sql1, new Object[]{subdate});
 
-            String sql2 = "REPLACE lez_webowner_bill(billdate, wid, pid, feecount, feeincome, showcount, showincome, totalincome, subtime) select subdate, wid, pid, sum(feecount), sum(feeincome), sum(showcount), sum(showincome), sum(totalincome), now() from lez_bill_day where subdate = ? group by subdate, wid, pid";
-            j.update(sql2, new Object[]{subdate});
+            String sql2 = " select subdate, wid, pid, sum(feecount) as feecount, sum(feeincome) as feeincome, sum(showcount) as showcount, sum(showincome) as showincome, sum(totalincome) as totalincome, now() as now" +
+                    " from lez_bill_day where subdate = ? group by subdate, wid, pid";
+            List<A2> list = j.query(sql2, new Object[]{subdate}, new BeanPropertyRowMapper<A2>(A2.class));
+            for (A2 a : list) {
+                String s2 = "REPLACE lez_webowner_bill(billdate, wid, pid, feecount, feeincome, showcount, showincome, totalincome, subtime) values " +
+                        "(?,?,?,?,?,?,?,?,?)";
+                j.update(s2, new Object[]{a.getSubdate(), a.getWid(), a.getPid(), a.getFeecount(), a.getFeeincome(), a.getShowcount(), a.getShowincome(), a.getTotalincome(), a.getNow()});
+            }
             String sql3 = "update lez_webowner_bill set payflag = 1, paytime = now() where wid in (1000, 1001)";
 
             j.update(sql3);

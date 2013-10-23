@@ -32,7 +32,10 @@
             <input name="totalincome" type="text"/>
             <label class="control-label">按指令：</label>
             <input name="cmdid" type="text"/>
-
+            <label class="control-label">点播号：</label>
+            <input name="orderdest" type="text"/>
+            <label class="control-label">扣量（0或者1）：</label>
+            <input name="feeflag" type="text"/>
             <input type="submit" class="btn btn-primary" value="查询"/>
         </fieldset>
     </form>

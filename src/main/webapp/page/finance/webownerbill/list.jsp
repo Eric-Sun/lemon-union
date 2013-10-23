@@ -17,6 +17,16 @@
             <jsp:param name="current" value="3"/>
         </jsp:include>
     </div>
+    <form name="form2" class="well form-inline" method="post"
+          action="/finance/webownerbill/query" id="form2">
+        <fieldset>
+            <label class="control-label">站长id：</label>
+            <input name="wid" type="text"/>
+            <label class="control-label">产品id：</label>
+            <input name="pid" type="text"/>
+            <input type="submit" class="btn btn-primary" value="查询"/>
+        </fieldset>
+    </form>
     <div class="body">
         <input type="submit" class="btn btn-primary" value="支付" onclick="doPay()"/>
         <input type="submit" class="btn btn-primary" value="取消支付" onclick="dontPay()"/>

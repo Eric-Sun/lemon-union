@@ -39,6 +39,20 @@ public class ProvinceIncomeController {
         long wid = -1;
         if (request.getParameter("wid") != null && !request.getParameter("wid").equals(""))
             wid = new Long(request.getParameter("wid"));
+        String adid = "";
+        if (request.getParameter("adid") != null) {
+            adid = request.getParameter("adid");
+        }
+        String servicecode="";
+        if(request.getParameter("servicecode")!=null){
+            servicecode=request.getParameter("servicecode");
+        }
+        String cmd = "";
+        if (request.getParameter("cmd") != null)
+            cmd = request.getParameter("cmd");
+        String orderdest = "";
+        if (request.getParameter("orderdest") != null)
+            orderdest = request.getParameter("orderdest");
         String beginDateStr = null;
         if (request.getParameter("beginDate") != null && !request.getParameter("beginDate").equals(""))
             beginDateStr = request.getParameter("beginDate");
@@ -56,7 +70,7 @@ public class ProvinceIncomeController {
         if (request.getParameter("pageNum") != null) {
             pageNum = new Integer(request.getParameter("pageNum"));
         }
-        List<ProvinceIncomeDTO> list = service.query(wid, sdf.parse(beginDateStr + " 00:00:00"), sdf.parse(endDateStr + " 23:59:59"), pageNum, pageSize);
+        List<ProvinceIncomeDTO> list = service.query(wid, adid, cmd, orderdest, sdf.parse(beginDateStr + " 00:00:00"), sdf.parse(endDateStr + " 23:59:59"), pageNum, pageSize,servicecode);
         int count = service.queryCount(wid, sdf.parse(beginDateStr + " 00:00:00"), sdf.parse(endDateStr + " 23:59:59"));
         Page<ProvinceIncomeDTO> page = PageUtil.getPage(count, pageNum, list, pageSize);
 

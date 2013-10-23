@@ -19,6 +19,15 @@ public class IvrInfoDTO {
     private String orderdest;
     private int status;
     private Date subtime;
+    private int curCount;
+
+    public int getCurCount() {
+        return curCount;
+    }
+
+    public void setCurCount(int curCount) {
+        this.curCount = curCount;
+    }
 
     public long getChannel() {
         return channel;
