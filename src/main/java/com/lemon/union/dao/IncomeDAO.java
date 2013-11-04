@@ -50,7 +50,7 @@ public class IncomeDAO {
         if (!"".equals(orderdest)) {
             cond3 = " and a.orderdest ='" + orderdest + "' ";
         }
-        String cond4 = " and 1=1";
+        String cond4 = " and 1=1 ";
         if (!"".equals(servicecode)) {
             cond4 = " and a.servicecode='" + servicecode + "' ";
         }
@@ -79,7 +79,7 @@ public class IncomeDAO {
         if (wid != -1)
             cond = " and a.wid=" + wid + " ";
 
-        String cond4 = " and 1=1";
+        String cond4 = " and 1=1 ";
         if (!"".equals(servicecode)) {
             cond4 = " and a.servicecode='" + servicecode + "' ";
         }
